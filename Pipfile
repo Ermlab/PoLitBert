@@ -8,6 +8,8 @@ jupyter = "*"
 
 [packages]
 sentencepiece = "*"
+transformers = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.7"
