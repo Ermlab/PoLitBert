@@ -12,7 +12,18 @@ Polish RoBERTA model trained on Polish Wikipedia, Polish literature, Oscar.
 
 
 1. Prepare huge text file 'data.txt' with Wikipedia text, each wiki article is separated by new line
-2.  Prepare another file for sentencpiece, where each sentence is in one line. 
+
+
+1. Prepare huge text file 'data.txt' with: 
+
+ * Wikipedia text (2.7GB), 
+ * Polish books (4.5GB) 
+ * Oscar corpus (47GB)
+ 
+ each wiki article is separated by new line
+
+2. Take 20M lines and prepare another file for sentencpiece, where each sentence is in one line. 
+
 3. Train sentencepiece vocabulary. 
 Do you use default mapping for custom symbols Unknown (<unk>), BOS (<s>) and EOS </s>) or add others eg. <pad> or <mask> https://github.com/google/sentencepiece/blob/master/doc/special_symbols.md
 
