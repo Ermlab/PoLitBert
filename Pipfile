@@ -6,11 +6,12 @@ verify_ssl = true
 [dev-packages]
 jupyter = "*"
 ipykernel = "*"
+pylint = "*"
 
 [packages]
 sentencepiece = "*"
-transformers = "*"
 nltk = "*"
+tqdm = "*"
 
 [requires]
 python_version = "3.7"
