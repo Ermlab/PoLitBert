@@ -12,6 +12,7 @@ pylint = "*"
 sentencepiece = "*"
 nltk = "*"
 tqdm = "*"
+fairseq = "*"
 
 [requires]
 python_version = "3.7"
