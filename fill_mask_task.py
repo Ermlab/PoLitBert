@@ -17,8 +17,10 @@ vocab_path = os.path.join(root_path,vocab_model_file)
 #%% Ermlab model
 root_path = "./data/wiki_model/"
 model_path = os.path.join(root_path,"checkpoints/")
-checkpoint_file = "checkpoint94.pt"
 checkpoint_file = "checkpoint77.pt"
+checkpoint_file = "checkpoint94.pt"
+checkpoint_file = "checkpoint127.pt"
+
 
 vocab_model_file="wikipedia_upper_voc_32000_sen10000000.model"
 vocab_path = os.path.join(root_path, "vocab", vocab_model_file)
@@ -52,9 +54,9 @@ sentences = [
     # 'W Olsztynie pracował Mikołaj Kopernik, ten który <mask> ziemię a wstrzymał słońce.',
     # 'Krzysztof <mask> do sklepu i zrobił zakupy na śniadanie.',
     # 'Anna <mask> do sklepu i zrobiła zakupy na śniadanie.',
-    'Samolot wystartował i zjadł <mask>.',
-    'Nie lubił zupy <mask> , ale musiał ją zjeść i wtedy zwymiotował',
-    'Czytał jedząc <mask> i wtedy pojawili się kosmici',
+    'Samolot <mask>, planowany przylot do Lisbony był na 17.',
+    'Nie lubił zupy <mask>, ale musiał ją zjeść i wtedy zwymiotował',
+    'Czytał jedząc <mask> na obiad i wtedy pojawili się kosmici',
     'Na śniadanie zjadł kanapkę z <mask>, marchewką i sałatą',
     'Na śniadanie zjadł kanapkę z <mask>, sałatą i marchweką',
     'Na śniadanie zjadł kanapkę z pomidorem, marchewką, <mask> i sałatą',

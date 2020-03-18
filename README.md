@@ -7,6 +7,50 @@
 Polish RoBERTA model trained on Polish Wikipedia, Polish literature, Oscar.
 
 
+## Pretrainde models
+
+
+### Polish Wikipedia Cased
+
+Data: [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/)
+Extracted data to corpus_wikipedia_2020-02-01.txt (~2.7GB)
+
+
+
+Vocabulary: BPE(sentencepiece) 32000
+
+* [vocab model file](/data/wiki_model/vocab/wikipedia_upper_voc_32000_sen10000000.model)
+* [vocab file](/data/wiki_model/vocab/wikipedia_upper_voc_32000_sen10000000.vocab)
+* [vocab file - fairseq format](/data/wiki_model/vocab/wikipedia_upper_voc_32000_sen10000000_fair.vocab)
+
+Data preparation:
+
+Split **corpus_wikipedia_2020-02-01.txt**
+
+* [corpus_wikipedia_2020-02-01_train.txt]() (80%) - lines from 0 -3500002
+* [corpus_wikipedia_2020-02-01_valid.txt]() (10%) - lines from 3500002 - 3950001
+* [corpus_wikipedia_2020-02-01_test.txt]()  (10%) - lines from 3950001 - 4355333
+
+Encode with
+
+Model file:
+Tensorboard logs:
+
+GPU - aws p3.8xlarge (4 GPU)
+
+Trainning protocol:
+
+
+
+Fairseq-train command:
+
+```
+
+```
+
+
+
+
 ## Training Fairseq Polish RoBERTA from scratch
 
 
@@ -50,72 +94,9 @@ or trainpref is enough
 7. Run training 
 
 
-## AWS p3 prepare
 
-Remove conda
+## Acknowledgements
 
-```
-rm -rf /home/ubuntu/anaconda3
-```
+I'd like to express my gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
+Also appreciate the help from Simone Francia (@simonefrancia) form Musixmatch for his [detailed explanations how they trained Roberta](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
 
-install sqllite
-
-```
-sudo apt install libsqlite3-dev
-```
-
-intall pyenv
-
-```
-curl https://pyenv.run | bash
-```
-
-install python 3.7.3
-
-```
-pyenv install 3.7.3
-
-python --version
-```
-Set global python version to 3.7.3
-
-```
-pyenv global 3.7.3
-```
-
-
-Install pipenv - check 
-
-```
-pip install --user pipenv
-```
-
-clone the herbert repo
-
-```
-git clone https://github.com/Ermlab/herbert.git
-git checkout dev
-```
-
-Install dependecies
-
-```
-cd herbert
-pipenv install
-```
-
-run trainning
-
-run tensorboard
-
-```
-tensorboard --logdir /mnt/efs/fs1/bert_model/checkpoints/wiki_model/logs/
-```
-
-
-
-Tunell ssh to Tensorboard
-```
-ssh -A -t [user]@[remote_server] -L [local_port]:localhost:[remote_port]
-```
-    
