@@ -15,6 +15,20 @@ sudo apt install libsqlite3-dev
 sudo apt-get install libffi-dev
 ```
 
+Set cuda version 
+
+```
+$ sudo rm /usr/local/cuda
+sudo ln -s /usr/local/cuda-10.2 /usr/local/cuda
+
+
+#check if it works
+$ cd /usr/local/cuda/samples/1_Utilities/deviceQuery
+sudo make
+./deviceQuery
+
+```
+
 intall pyenv
 
 ```
@@ -67,6 +81,18 @@ cd herbert
 pipenv install
 ```
 
+Install NVIDIA apex
+
+```
+cd herbert
+pipenv shell
+
+cd ../tools/
+git clone https://github.com/NVIDIA/apex
+cd apex
+CUDA_HOME=/usr/local/cuda-10.1/ pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+```
+
 run trainning
 
 ```
@@ -76,7 +102,7 @@ fairseq-train ....
 run tensorboard
 
 ```
-tensorboard --logdir /mnt/efs/fs1/bert_model/checkpoints/wiki_model/logs/
+tensorboard --logdir $LOGS_DIR
 ```
 
 
