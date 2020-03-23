@@ -7,6 +7,13 @@
 Polish RoBERTA model trained on Polish Wikipedia, Polish literature, Oscar.
 
 
+Data
+
+* [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/)
+* [Polish OpenSubtitles](https://object.pouta.csc.fi/OPUS-OpenSubtitles/v2018/mono/pl.txt.gz)
+* [Polish part Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz)
+
+
 ## Pretrainde models
 
 
@@ -14,8 +21,6 @@ Polish RoBERTA model trained on Polish Wikipedia, Polish literature, Oscar.
 
 Data: [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/)
 Extracted data to corpus_wikipedia_2020-02-01.txt (~2.7GB)
-
-
 
 Vocabulary: BPE(sentencepiece) 32000
 
@@ -31,19 +36,20 @@ Split **corpus_wikipedia_2020-02-01.txt**
 * [corpus_wikipedia_2020-02-01_valid.txt]() (10%) - lines from 3500002 - 3950001
 * [corpus_wikipedia_2020-02-01_test.txt]()  (10%) - lines from 3950001 - 4355333
 
-Encode with
-
-Model file:
-Tensorboard logs:
+Model file: ??
 
 GPU - aws p3.8xlarge (4 GPU)
 
 Trainning protocol:
 
 Efective batch size = 16*16*4 = 1024
-Updates             = 125000
+total steps = 125K
 Learning rate shedule = linear
-warmup =10000
+warmup =10k
+max_lr=0.0005
+Tensorboard logs: https://tensorboard.dev/experiment/GWHpk2p1TX2kG9jjvjYtRw
+triangular: https://tensorboard.dev/experiment/vkP5c2HDRCqv6WTLXfGH8w/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
+
 
 
 Fairseq-train command:
@@ -56,10 +62,6 @@ TOKENS_PER_SAMPLE=512   # Max sequence length
 MAX_POSITIONS=512       # Num. positional embeddings (usually same as above)
 MAX_SENTENCES=16        # Number of sequences per batch (batch size) need 16GB GPU RAM
 UPDATE_FREQ=16          # Increase the batch size 16x
-
-DATA_DIR=/mnt/efs/fs1/bert_model/datasets/roberta_data/wiki_model/
-SAVE_DIR=/mnt/efs/fs1/bert_model/checkpoints/wiki_model
-LOGS_DIR=/mnt/efs/fs1/bert_model/checkpoints/wiki_model/logs/
 
 fairseq-train --fp16 $DATA_DIR \
     --task masked_lm --criterion masked_lm \
