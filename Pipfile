@@ -9,6 +9,8 @@ ipykernel = "*"
 pylint = "*"
 tensorboardx = "*"
 tensorboard = "*"
+pandas = "*"
+matplotlib = "*"
 
 [packages]
 sentencepiece = "*"
