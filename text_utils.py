@@ -1,10 +1,14 @@
+'''Text utils
 
+'''
 import sys
 import datetime as dt
 import os
 import mmap
 
-# utils functions
+from collections import  namedtuple
+import morfeusz2
+import nltk
 
 
 def get_num_lines(file_path):
@@ -17,6 +21,7 @@ def get_num_lines(file_path):
 
 
 def create_nltk_sentence_tokenizer():
+    
     extra_abbreviations = ['ps',  'inc', 'Corp', 'Ltd', 'Co', 'pkt', 'Dz.Ap', 'Jr', 'jr', 'sp', 'Sp', 'poj',  'pseud', 'krypt', 'sygn', 'Dz.U', 'ws', 'itd', 'np', 'sanskryt', 'nr', 'gł', 'Takht', 'tzw', 't.zw', 'ewan', 'tyt', 'oryg', 't.j', 'vs', 'l.mn', 'l.poj' ]
 
     position_abbrev = ['Ks', 'Abp', 'abp','bp','dr', 'kard', 'mgr', 'prof', 'zwycz', 'hab', 'arch', 'arch.kraj', 'B.Sc', 'Ph.D', 'lek', 'med', 'n.med', 'bł', 'św', 'hr', 'dziek' ]
@@ -42,5 +47,34 @@ def create_nltk_sentence_tokenizer():
     sentence_tokenizer._params.abbrev_types.update(extra_abbreviations)
 
     return sentence_tokenizer
+
+
+
+
+
+InterpTuple = namedtuple("InterpTuple", field_names=["word", "lemat", "tags", "info", "style"])
+
+
+class MorfAnalyzer(object):
+
+
+    def __init__(self):
+        self._morfeusz = morfeusz2.Morfeusz(separate_numbering=True)
+
+        self._verb_pattern = set(['fin', 'praet', 'inf', 'pred', 'bedzie'])
+
+    def analyse(self,sentence):
+        '''Analyse the sentence and return morfeusz2 morf tags
+        '''
+        analysis = self._morfeusz.analyse(sentence)
+        return analysis
+
+    def sentence_valid(self,txt):
+        '''Check if the passed txt is valid sentence, should contain min. one verb in proper form'''
+
+        analysis = self.analyse(txt)
+                
+        # evaluation is done lazy
+        return any(InterpTuple(*a[2]).tags.split(":")[0] in self._verb_pattern for a in analysis)
 
 
