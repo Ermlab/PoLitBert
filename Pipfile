@@ -11,12 +11,21 @@ tensorboardx = "*"
 tensorboard = "*"
 pandas = "*"
 matplotlib = "*"
+black = "*"
+autopep8 = "*"
 
 [packages]
 sentencepiece = "*"
 nltk = "*"
 tqdm = "*"
 fairseq = "*"
+langdetect = "*"
+polyglot = "*"
+pycld2 = "*"
+pyicu = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
