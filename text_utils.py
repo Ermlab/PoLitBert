@@ -32,8 +32,8 @@ import logging
 
 logging.basicConfig(level=logging.ERROR)
 # disable logging from polyglot
-#Detector is not able to detect the language reliably.
-logger_poly = logging.getLogger('polyglot.detect.base:Detector')
+# Detector is not able to detect the language reliably.
+logger_poly = logging.getLogger("polyglot.detect.base:Detector")
 
 logger_poly.setLevel(level=logging.CRITICAL)
 logger_poly.propagate = False
@@ -46,9 +46,8 @@ def check_polish_sentence(sentence):
     
     """
 
-
     # prevent error "input contains invalid UTF-8 around byte"
-    text_to_detect = ''.join(x for x in sentence if x.isprintable())
+    text_to_detect = "".join(x for x in sentence if x.isprintable())
     try:
         langs = detect_langs(text_to_detect)
     except Exception as e:
@@ -57,22 +56,25 @@ def check_polish_sentence(sentence):
         return True
 
     # if contains 'pl' with probability grateher then 0.4
-    langdet_pl =  any([(l.lang == "pl" and l.prob > 0.4) for l in langs])
+    langdet_pl = any([(l.lang == "pl" and l.prob > 0.4) for l in langs])
 
     detector = Detector(text_to_detect, quiet=True)
-    poly_pl = detector.language.code =='pl' and detector.language.confidence>40
+    poly_pl = detector.language.code == "pl" and detector.language.confidence > 40
 
     return langdet_pl or poly_pl
 
 
-
 def create_nltk_sentence_tokenizer():
+    """
+
+    find in vim with pattern: /\<\w\{2,3\}\>\.\n
+    """
 
     extra_abbreviations = [
         "ps",
         "inc",
-        "Corp",
-        "Ltd",
+        "corp",
+        "ltd",
         "Co",
         "pkt",
         "Dz.Ap",
@@ -84,8 +86,6 @@ def create_nltk_sentence_tokenizer():
         "poj",
         "pseud",
         "krypt",
-        "sygn",
-        "Dz.U",
         "ws",
         "itd",
         "np",
@@ -94,7 +94,7 @@ def create_nltk_sentence_tokenizer():
         "gł",
         "Takht",
         "tzw",
-        "t.zw",
+        "tzn" "t.zw",
         "ewan",
         "tyt",
         "fig",
@@ -108,10 +108,27 @@ def create_nltk_sentence_tokenizer():
         "Al",
         "el",
         "tel",
-        "wew",
+        "wew",  # wewnętrzny
         "bud",
         "pok",
         "wł",
+        "sam",  # samochód
+        "sa",  # spółka sa.
+        "wit",  # witaminy
+        "mat",  # materiały
+        "kat",  # kategorii
+        "wg",  # według
+        "btw",  #
+        "itp",  #
+        "wz",  # w związku
+        "gosp",  #
+        "dział",  #
+        "",  #
+        "hurt",  #
+        "mech",  #
+        "wyj",  # wyj
+        "pt",  # pod tytułem
+        "zew",  # zewnętrzny
     ]
 
     position_abbrev = [
@@ -154,6 +171,14 @@ def create_nltk_sentence_tokenizer():
         "obj",
         "alk",
         "wag",
+        "obr",  # obroty
+        "wk",
+        "mm",
+        "MB",  # mega bajty
+        "Mb",  # mega bity
+        "jedn",  # jednostkowe
+        "op",
+        "szt",  # sztuk
     ]  # not added: tys.
 
     actions_abbrev = [
@@ -161,7 +186,7 @@ def create_nltk_sentence_tokenizer():
         "tlum",
         "zob",
         "wym",
-        "pot",
+        "w/wym" "pot",
         "ww",
         "ogł",
         "wyd",
@@ -186,9 +211,20 @@ def create_nltk_sentence_tokenizer():
         "zaw",
         "późn",
         "spr",
+        "jw",
+        "odp",  # odpowiedź
+        "symb",  # symbol
+        "klaw",  # klawiaturowe
     ]
 
-    place_abbrev = ["Śl", "płd", "geogr"]
+    place_abbrev = [
+        "śl",
+        "płd",
+        "geogr",
+        "zs",
+        "pom",  # pomorskie
+        "kuj-pom",  # kujawsko pomorskie
+    ]
 
     lang_abbrev = [
         "jęz",
@@ -215,6 +251,24 @@ def create_nltk_sentence_tokenizer():
         "węg",
         "ros",
         "boś",
+        "szw",
+    ]
+
+    administration = [
+        "dz.urz" "póź.zm",  # dziennik urzędowy
+        "rej",  # rejestr, rejestracyjny dowód
+        "sygn",  # sygnatura
+        "Dz.U",  # dziennik ustaw
+        "woj",  # województow
+        "ozn",  #
+        "ust",  # ustawa
+        "ref",  # ref
+        "dz",
+        "akt",  # akta
+    ]
+
+    time = [
+        "tyg",  # tygodniu
     ]
 
     military_abbrev = [
@@ -229,6 +283,7 @@ def create_nltk_sentence_tokenizer():
         "gw",
         "dyw",
         "bryg",
+        #        "br", # brygady
         "ppłk",
         "mar",
         "marsz",
@@ -238,6 +293,12 @@ def create_nltk_sentence_tokenizer():
         "BPanc",
         "DKaw",
         "p.uł",
+        "sierż",
+        "post",
+        "asp",
+        "szt",  # sztabowy
+        "podinsp",
+        "kom",  # komendant, tel. komórka
     ]
 
     extra_abbreviations = (
@@ -249,6 +310,8 @@ def create_nltk_sentence_tokenizer():
         + actions_abbrev
         + place_abbrev
         + lang_abbrev
+        + administration
+        + time
         + military_abbrev
     )
 
@@ -258,6 +321,12 @@ def create_nltk_sentence_tokenizer():
     sentence_tokenizer._params.abbrev_types.update(extra_abbreviations)
 
     return sentence_tokenizer
+
+
+# def sent_tokenizer(sentence):
+
+
+#     return
 
 
 def corpus_process_sentence(
@@ -288,6 +357,9 @@ def corpus_process_sentence(
     all_sentences = 0
     non_polish = 0
 
+    non_valid_sentences_list = []
+    non_polish_list = []
+
     with open(courpus_output_file, "w+") as output_file:
         with open(corpus_input_file) as f:
             i = 0
@@ -310,26 +382,25 @@ def corpus_process_sentence(
 
                         all_sentences += 1
 
-                        if (
-                            sentence_length < 4
-                            or sentence_length > max_sentence_length
-                        ):
+                        if sentence_length < 4 or sentence_length > max_sentence_length:
                             # omit to long and too short sentences
                             invalid_length_sentences += 1
                             continue
 
-                        if not check_polish_sentence(sentence):
+                        if sentence_length > 60 and not check_polish_sentence(sentence):
                             non_polish += 1
+                            non_polish_list.append(sentence)
                             continue
 
                         if (
                             check_valid_sentence
-                            and sentence_length > 80
+                            and sentence_length > 200
                             and not morf_sent.sentence_valid(sentence)
                         ):
 
                             # omit sentence if is not valid, we do not check short sentences
                             non_valid_sentences += 1
+                            non_valid_sentences_list.append(sentence)
 
                             continue
 
@@ -351,7 +422,7 @@ def corpus_process_sentence(
         "non_polish": non_polish,
     }
 
-    return stats
+    return stats, non_valid_sentences_list, non_polish_list
 
 
 InterpTuple = namedtuple(
@@ -363,7 +434,7 @@ class MorfAnalyzer(object):
     def __init__(self):
         self._morfeusz = morfeusz2.Morfeusz(separate_numbering=True)
 
-        self._verb_pattern = set(["fin", "praet", "inf", "pred", "bedzie"])  # 'ger'
+        self._verb_pattern = set(["fin", "praet", "inf", "pred", "bedzie"])  # 'ger', ppas
 
     def analyse(self, sentence):
         """Analyse the sentence and return morfeusz2 morf tags
@@ -381,3 +452,700 @@ class MorfAnalyzer(object):
             InterpTuple(*a[2]).tags.split(":")[0] in self._verb_pattern
             for a in analysis
         )
+
+
+
+
+
+# mapping from nkjp to ud tag set
+# https://gitlab.com/piotr.pezik/apt_pl/-/blob/master/translation.py
+
+# Licensed under the Apache License, Version 2.0 (the 'License');
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#    http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an 'AS IS' BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+
+from enum import Enum
+
+D_FIELD=Enum('D_FIELD', 'flexemes cats special_lemmas special_words default POS FEATURES')
+
+
+nkjp_to_ud_dict={
+    D_FIELD.flexemes.name:{
+        'ger': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'NOUN',
+                D_FIELD.FEATURES.name:[
+                    ('VerbForm', 'Ger')
+                ]
+            }
+        },
+        'subst': {
+            D_FIELD.special_lemmas.name: [
+                (
+                    ['kto', 'co'],  # Kto i co są w subst-ach
+                    {
+                        D_FIELD.POS.name: 'PRON',
+                        D_FIELD.FEATURES.name: [('PronType', 'Int,Rel')]
+                    }),
+                (
+                    ['coś', 'ktoś', 'cokolwiek', 'ktokolwiek'],
+                    {
+                        D_FIELD.POS.name: 'PRON',
+                        D_FIELD.FEATURES.name: [('PronType', 'Ind')]
+                    }),
+                (
+                    ['nikt', 'nic'],  # nikt i nic to subst
+                    {
+                        D_FIELD.POS.name: 'PRON',
+                        D_FIELD.FEATURES.name: [('PronType', 'Neg')]
+                    }),
+                (
+                    ['wszystko', 'wszyscy'],
+                    {
+                        D_FIELD.POS.name: 'PRON',
+                        D_FIELD.FEATURES.name: [('PronType', 'Tot')]
+                    }),
+                (
+                    ['to'],
+                    {
+                        D_FIELD.POS.name: 'PRON',
+                        D_FIELD.FEATURES.name: [('PronType', 'Dem')]
+                    })
+            ],
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'NOUN',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'pred': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'comp': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'SCONJ',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'interp': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'PUNCT'
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'conj': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'CONJ',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'adv': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'ADV',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'aglt': {
+            D_FIELD.special_lemmas.name: [
+                            (
+                                ['być'],  # Kto i co są w subst-ach
+                                {
+                                    D_FIELD.POS.name: 'AUX',
+                                    D_FIELD.FEATURES.name: [
+                                        ('Mood', 'Ind'),
+                                        ('Tense', 'Pres'),
+                                        ('VerbForm', 'Fin')
+                                    ]
+                                })],
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'AUX',
+                D_FIELD.FEATURES.name: [
+                    ('PronType', 'Prs'),
+                    ('Reflex', 'Yes'),
+                    ('Mood', 'Ind'),
+                    ('Tense', 'Pres'),
+                    ('VerbForm', 'Fin')
+                ]}
+        },
+        'bedzie': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'AUX',
+                # D_FIELD.FEATURES.name:
+            },
+            D_FIELD.special_words.name: [
+                (
+                    ['będą', 'będzie', 'będę', 'będziemy', 'będziesz'],
+                    {
+                        D_FIELD.POS.name: 'AUX',
+                        D_FIELD.FEATURES.name: [
+                                            ('Tense', 'Fut'),
+                                            ('Mood', 'Ind'),
+                                            ('VerbForm', 'Fin'),
+                                        ]})],
+        },
+        'burk': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'NOUN',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'depr': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'NOUN',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'ign': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'X',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'dig': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'NUM',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'romandig': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'NUM',
+                # D_FIELD.FEATURES.name:
+            }
+        },
+        'siebie': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'PRON',
+                D_FIELD.FEATURES.name: [
+                    ('PronType', 'Prs'),
+                    ('Reflex', 'Yes')
+                ]
+            }
+        },
+        'numcol': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'NUM',
+                D_FIELD.FEATURES.name: [
+                    ('NumType', 'Sets')
+                ]
+            }
+        },
+        'winien': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'ADJ'
+            },
+            D_FIELD.special_lemmas.name: [
+                (
+                    ['powinien'],
+                    {
+                        D_FIELD.POS.name: 'ADJ',
+                    })
+            ]
+        },
+        # 'adj':{
+        #     D_FIELD.special_lemmas.name: [
+        #         (
+        #         ['jaki', 'jakiś', 'żaden', 'wszystek', 'niejaki', 'który', 'taki', 'niektóry', 'którykolwiek', 'któryś',
+        #          'ten', 'jakikolwiek', 'tamten', 'każdy', 'wszelki', 'ów'],
+        #         {
+        #             D_FIELD.POS.name: 'DET',
+        #             D_FIELD.FEATURES.name: [('PronType', 'Ind')]
+        #         })
+        #     ],
+        #     D_FIELD.default.name:{
+        #         D_FIELD.POS.name:'ADJ'
+        #     }
+        # },
+        'xxx':{
+            D_FIELD.default.name:{
+                D_FIELD.POS.name:'X'
+            }
+        },
+        'interj': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'INTJ'
+            }
+        },
+        'adj':{
+            D_FIELD.special_lemmas.name: [
+                (
+                [ 'wszystek','wszyscy','każdy', 'wszelki'],
+                {
+                    D_FIELD.POS.name: 'DET',
+                    D_FIELD.FEATURES.name: [('PronType', 'Tot')]
+                }),
+                (
+                ['jaki', 'który'], #Kto i co są w subst-ach
+                {
+                    D_FIELD.POS.name: 'DET',
+                    D_FIELD.FEATURES.name: [('PronType', 'Int,Rel')]
+                }),
+                (
+                ['to','ten','taki','tamten', 'ów'],
+                {
+                    D_FIELD.POS.name: 'DET',
+                    D_FIELD.FEATURES.name: [('PronType', 'Dem')]
+                }),
+                (
+                ['jakiś', 'kilka', 'kilkadziesiąt', 'kilkaset', 'niektóry', 'któryś', 'jakikolwiek', 'niejaki', 'którykolwiek'], #kilkanaście jest w num, coś/ktoś w subst
+                {
+                    D_FIELD.POS.name: 'DET',
+                    D_FIELD.FEATURES.name: [('PronType', 'Ind')]
+                }),
+                (
+                ['żaden'], #nikt i nic to subst
+                {
+                    D_FIELD.POS.name: 'DET',
+                    D_FIELD.FEATURES.name: [('PronType', 'Neg')]
+                })
+            ],
+            D_FIELD.default.name:{
+                D_FIELD.POS.name:'ADJ'
+            }
+        },
+        'adjc':{
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'ADJ'
+            },
+            D_FIELD.special_words.name: [
+                (
+                ['winien','gotów','pewien','ciekaw','wart','pełen','świadom','pewnien',
+                 'godzien','łaskaw','znan','rad','wesół','zdrów'],
+                {
+                    D_FIELD.POS.name: 'ADJ'
+                })
+            ]
+        },
+        'qub': {
+            D_FIELD.special_lemmas.name: [
+                (
+                ['się'],
+                {
+                    D_FIELD.POS.name: 'PRON',
+                    D_FIELD.FEATURES.name: [('PronType', 'Prs'), ('Reflex', 'Yes')]
+                })
+            ],
+            D_FIELD.special_words.name: [
+                (
+                    ['sie', 'sia'],
+                    {
+                        D_FIELD.POS.name: 'PRON',
+                        D_FIELD.FEATURES.name: [('PronType', 'Prs'), ('Reflex', 'Yes'), ('Typo', 'Yes')]
+                    }),
+                (
+                    ['by'],
+                    {
+                        D_FIELD.POS.name: 'AUX',
+                        D_FIELD.FEATURES.name: [('VerbForm', 'Fin'), ('Mood', 'Cnd'), ('Aspect', 'Imp'),]
+                    })],
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'PART'
+            }
+        },
+        'adja':{
+            D_FIELD.default.name:{
+                D_FIELD.POS.name:'ADJ',
+                D_FIELD.FEATURES.name:[
+                    ('Hyph', 'Yes')
+                ]
+            }
+        },
+        'prep': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'ADP',
+                D_FIELD.FEATURES.name: [
+                    ('AdpType', 'Prep')
+                ]
+            }
+        },
+        'praet': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                D_FIELD.FEATURES.name: [
+                    ('Tense', 'Past'),
+                    ('VerbForm', 'Part'),
+                    ('Voice', 'Act')
+                ]
+            }
+        },
+        'pact': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                D_FIELD.FEATURES.name: [
+                    ('VerbForm', 'Part'),
+                    ('Voice', 'Act'),
+                    ('Tense', 'Pres')
+                ]
+            }
+        },
+        'pant': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                D_FIELD.FEATURES.name: [
+                    ('Tense', 'Past'),
+                    ('VerbForm', 'Trans')
+                ]
+            }
+        },
+        'pcon': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                D_FIELD.FEATURES.name: [
+                    ('Tense', 'Pres'),
+                    ('VerbForm', 'Trans')
+                ]
+            }
+        },
+        'ppas': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                D_FIELD.FEATURES.name: [
+                    ('VerbForm', 'Part'),
+                    ('Voice', 'Pass')
+                ]
+            }
+        },
+        'num': {
+            D_FIELD.special_lemmas.name: [
+                (
+                    ['kilkanaście', 'kilka', 'kilkadziesiąt', 'kilkaset'],
+                    {
+                        D_FIELD.POS.name: 'DET',
+                        D_FIELD.FEATURES.name: [('PronType', 'Ind'), ('NumType', 'Card')]
+                    })
+            ],
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'NUM',
+                D_FIELD.FEATURES.name: [
+                    # ('NumType', 'Sets')
+                ]
+            }
+        },
+        'brev': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'X',
+                # D_FIELD.FEATURES.name: [
+                #     ('Abbr', 'Yes')
+                # ]
+            }
+        },
+        'adjp': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'ADJ',
+                D_FIELD.FEATURES.name: [
+                    ('PrepCase', 'Pre')
+                ]
+            }
+        },
+        'fin': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                D_FIELD.FEATURES.name: {
+                    ('VerbForm', 'Fin'),
+                    ('Tense', 'Pres'),
+                    ('Mood', 'Ind')
+                }
+            }
+        },
+        'ppron12': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'PRON',
+                D_FIELD.FEATURES.name: {
+                    ('PronType', 'Prs')
+                }
+            }
+        },
+        'ppron3': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'PRON',
+                D_FIELD.FEATURES.name: {
+                    ('PronType', 'Prs')
+                }
+            }
+        },
+        'inf': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                D_FIELD.FEATURES.name: {('VerbForm', 'Inf')}
+            }
+        },
+        # 'num':{
+        #     #D_FIELD.special_lemmas.name :None,
+        #     #D_FIELD.special_words.name :None,
+        #     D_FIELD.default.name:{
+        #         D_FIELD.POS.name:'NUM'
+        #         #,D_FIELD.FEATURES.name:
+        #     }
+        # },
+        'impt': {
+            D_FIELD.default.name: {
+                D_FIELD.POS.name: 'VERB',
+                D_FIELD.FEATURES.name: [
+                    ('Mood', 'Imp'),
+                    ('VerbForm', 'Fin')
+                ]
+            }
+        },
+        'imps':{
+            D_FIELD.default.name:{
+                D_FIELD.POS.name:'VERB',
+                D_FIELD.FEATURES.name:[
+                    ('Case','Nom'),
+                    ('Gender', 'Neut'),
+                    ('Negative', 'Pos'),
+                    ('Number','Sing'),
+                    ('VerbForm', 'Part'),
+                    ('Voice','Pass')
+                ]
+            }
+        },
+    },
+    D_FIELD.cats.name:{
+        'pl':{
+            D_FIELD.default.name:{
+                D_FIELD.FEATURES.name:{('Number','Plur')}
+            }
+        },
+        'pun': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: [
+                    ('Abbr', 'Yes')
+                ]
+            }
+        },
+        'npun': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: [
+                    ('Abbr', 'Yes')
+                ]
+            }
+        },
+        'acc':{
+            D_FIELD.default.name:{
+                D_FIELD.FEATURES.name:{('Case','Acc')}
+            }
+        },
+        'nakc': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Variant', 'Short')}
+            }
+        },
+        'voc': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Case', 'Voc')}
+            }
+        },
+        # 'ppron12': {
+        #     D_FIELD.default.name: {
+        #         D_FIELD.FEATURES.name: {
+        #             ('PronType', 'Prs')
+        #         }
+        #     }
+        # },
+        'm1': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {
+                    ('Animacy', 'Hum'),
+                    ('Gender', 'Masc')
+                }
+            }
+        },
+        'm2': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {
+                    ('Animacy', 'Anim'),
+                    ('Gender', 'Masc')
+                }
+            }
+        },
+        'm3': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {
+                    ('Animacy', 'Inan'),
+                    ('Gender', 'Masc')
+                }
+            }
+        },
+        'rec': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {
+                }
+            }
+        },
+        'nagl': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {
+                }
+            }
+        },
+        'agl': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {
+                }
+            }
+        },
+        'congr': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {
+                }
+            }
+        },
+        'praep': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: [
+                    ('PrepCase', 'Pre')
+                ]
+            }
+        },
+        '_': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {
+                }
+            }
+        },
+        'aff': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Polarity', 'Pos')}
+            }
+        },
+        'com': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Degree', 'Cmp')}
+            }
+        },
+        # 'com': {
+        #     D_FIELD.default.name: {
+        #         D_FIELD.FEATURES.name: {}
+        #     }
+        # },
+        'perf':{
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Aspect', 'Perf')}
+            }
+        },
+        'imperf': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Aspect', 'Imp')}
+            }
+        },
+        'sg': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Number', 'Sing')}
+            }
+        },
+        'gen': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Case', 'Gen')}
+            }
+        },
+        'nom': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Case', 'Nom')}
+            }
+        },
+        'pos': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Degree', 'Pos')}
+            }
+        },
+        'akc': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Variant', 'Long')}
+            }
+        },
+        'f': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Gender', 'Fem')}
+            }
+        },
+        'dat': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Case', 'Dat')}
+            }
+        },
+        'inst': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Case', 'Ins')}
+            }
+        },
+        'loc': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Case', 'Loc')}
+            }
+        },
+        'neg': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Polarity', 'Neg')}
+            }
+        },
+        'npraep': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('PrepCase', 'Npr')}
+            }
+        },
+        'nwok': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Variant', 'Short')}
+            }
+        },
+        'wok': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Variant', 'Long')}
+            }
+        },
+        'vok': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Variant', 'Long')}
+            }
+        },
+        'xxx': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Foreign', 'Yes')}
+            }
+        },
+        'pri': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Person', '1')}
+            }
+        },
+        'sec': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Person', '2')}
+            }
+        },
+        'ter': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Person', '3')}
+            }
+        },
+        'sup': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Degree', 'Sup')}
+            }
+        },
+        'n': {
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {('Gender', 'Neut')}
+            }
+        }
+    }
+}
+
+def get_main_ud_pos(nkjp_tag):
+    main_nkjp_tag = nkjp_tag.split(':')[0]
+    try:
+        return nkjp_to_ud_dict[D_FIELD.flexemes.name][main_nkjp_tag].get(D_FIELD.default.name)[D_FIELD.POS.name]
+    except:
+        return main_nkjp_tag

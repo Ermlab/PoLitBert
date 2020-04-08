@@ -13,6 +13,8 @@ pandas = "*"
 matplotlib = "*"
 black = "*"
 autopep8 = "*"
+flair = "*"
+pytorch = "*"
 
 [packages]
 sentencepiece = "*"
