@@ -14,7 +14,10 @@ matplotlib = "*"
 black = "*"
 autopep8 = "*"
 flair = "*"
-pytorch = "*"
+torch = "*"
+stanza = "*"
+spacy = "*"
+tensorflow = "*"
 
 [packages]
 sentencepiece = "*"
