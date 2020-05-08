@@ -81,21 +81,21 @@ sentences = [
 
 #%% test with morfeusz2
 
-morf = morfeusz2.Morfeusz(separate_numbering=True)
-
-verb_pattern = set(["fin", "praet", "inf", "pred", "bedzie"])
 morf_sent = tu.MorfeuszAnalyzer()
 
 morf_stanza = tu.StanzaAnalyzer()
+
+morf_krnnt = tu.KRNNTAnalyzer()
 
 for t, s in enumerate(sentences):
 
     is_valid1 = morf_sent.sentence_valid(s)
 
     is_valid2 = morf_stanza.sentence_valid(s)
-    
 
-    print(f"#####\n{s}\n morfeusz={is_valid1} stanza={is_valid2}")
+    is_valid3 = morf_krnnt.sentence_valid(s)
+
+    print(f"#####\n{s}\n morfeusz={is_valid1} stanza={is_valid2} krnnt={is_valid3}")
 
 
 
@@ -156,20 +156,20 @@ conv_main_ud = lambda x: tu.get_main_ud_pos(x[2])
 for s in sentences[0:]:
 
     print(f"\n>>>{s}\n sent len={len(s)}")
-    # run krnnt tagger
-    # x = requests.post(url, data=s.encode("utf-8"))
-    # # print(x.status_code)
-    # # print(x.text)
+    #run krnnt tagger
+    x = requests.post(url, data=s.encode("utf-8"))
+    # print(x.status_code)
+    # print(x.text)
 
-    # resp = x.json()
-    # list_nkjp_pos = list(map(conv_main_nkjp, resp[0]))
-    # krnnt_pos = list(map(conv_main_ud, resp[0]))
+    resp = x.json()
+    list_nkjp_pos = list(map(conv_main_nkjp, resp[0]))
+    krnnt_pos = list(map(conv_main_ud, resp[0]))
 
-    # stats_nkjp = Counter(list_nkjp_pos)
-    # stats_krnnt_ud = Counter(krnnt_pos)
-    # # print(f"NKJP tags stats={stats_nkjp}")
-    # print(f"krnnt UD   tags stats={stats_krnnt_ud}")
-    # print(f'ud sequence={",".join(krnnt_pos)}')
+    stats_nkjp = Counter(list_nkjp_pos)
+    stats_krnnt_ud = Counter(krnnt_pos)
+    # print(f"NKJP tags stats={stats_nkjp}")
+    print(f"krnnt UD   tags stats={stats_krnnt_ud}")
+    print(f'ud sequence={",".join(krnnt_pos)}')
 
     # run stanza tagger
     doc = nlp(s)  # run annotation over a sentence
@@ -205,7 +205,7 @@ import spacy
 
 sp_nlp = spacy.load("pl_spacy_model_morfeusz", force=True)
 
-#%%
+#%% 
 
 desc = [
     "Akcja powieści toczy się w Warszawie i Tworkach w czasach okupacji. Bohaterowie to młodzi kochankowie - Żydzi, którzy próbnują uciec przed historią i skryć się ze swoją miłością w zakładzie dla obłąkanych. To, co w powieści najważniejsze jednak, to nie fabuła, a raczej opis nastrojów bohaterów, oscylujących między melancholią a rozpaczą, nowatorskie podejście do tematu wojny, który staje się poniekąd drugorzędny w stosunku do prywatnych odczuć opisywanych postaci i wysublimowany styl.\\nNajlepsza i najczęściej nagradzana powieść Marka Bieńczyka! Książka wyróżniona Paszportem „Polityki” i Nagrodą im. Władysława Reymonta oraz nominacją do Nagrody Literackiej Nike!\\nNajlepsza i najczęściej nagradzana powieść  laureata Literackiej Nagrody Nike 2012.\nAkcja tej powieści rozgrywa się w roku 1943 w podwarszawskich Tworkach. Jej bohaterowie to grupka dwudziestolatków, dziewcząt i chłopców, Polaków i Żydów, którzy pracują w pozostającym pod niemieckim zarządem szpitalu psychiatrycznym. Okazuje się, że jedynym normalnym miejscem w nienormalnym świecie jest zakład dla obłąkanych. Znajdują tu azyl, dający nadzieję na w miarę spokojne i godne przetrwanie okupacji. W chwilach wolnych od zajęć młodzi bawią się, flirtują, spacerują po malowniczej okolicy, deklamują wiersze. Wydaje się, że piekło okupacji hitlerowskiej ich nie dotyczy. Ta beztroska nijak się ma do ponurych czasów, w których przyszło im żyć, a których grozę w pełni zdaje się początkowo odczuwać chyba tylko czytelnik Lecz ni stąd ni zowąd, po cichu i niezauważenie, znikają z kart powieści jej kolejni bohaterowie. Pozostają po nich tylko pożegnalne listy.",

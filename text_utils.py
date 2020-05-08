@@ -354,7 +354,8 @@ def corpus_process_sentence(
     sentence_tokenizer = create_nltk_sentence_tokenizer()
 
     # morf_sent = MorfeuszAnalyzer()
-    morf_sent = StanzaAnalyzer()
+    # morf_sent = StanzaAnalyzer()
+    morf_sent = KRNNTAnalyzer()
 
     # statistics
     invalid_length_sentences = 0
@@ -488,13 +489,11 @@ class StanzaAnalyzer(MorfAnalyzer):
 
         stanza.download("pl")
         self._nlp_pipeline = stanza.Pipeline(
-            "pl", processors="tokenize,pos,lemma", verbose=False
+            "pl", processors="tokenize,pos,lemma", verbose=True,
+            use_gpu=True
         )  # initialize neural pipeline
 
-        # 'ger', ppas - Katarzyna i Monika mówią że to można by dodać
-        self._verb_pattern = set(
-            ["fin", "praet", "inf", "pred", "impt", "imps", "bedzie"]
-        )
+        self._conv_stanza_pos = lambda x: [w.pos for w in x.words]
 
     def analyse(self, sentence):
         """Analyse the sentence and return stanza pos tags
@@ -506,15 +505,13 @@ class StanzaAnalyzer(MorfAnalyzer):
 
         doc = self.analyse(sentence)
 
-        conv_stanza_pos = lambda x: [w.pos for w in x.words]
-
         flatten = itertools.chain.from_iterable
 
         # get flatten list of tokens from all sentences tokenized by stanza
         # our sentence tokenization is different from stanza, very often our tokenized
         # sentence is treated as 2 or 3 sentences by stanza
         # map sentence word to pos tags and flatten all list
-        stanza_pos = list(flatten(map(conv_stanza_pos, doc.sentences)))
+        stanza_pos = list(flatten(map(self._conv_stanza_pos, doc.sentences)))
         stats_stanza_pos = Counter(stanza_pos)
 
         # prosta heurystyka na bazie obserwacji
@@ -524,8 +521,67 @@ class StanzaAnalyzer(MorfAnalyzer):
         # 3 verb - max_noun+4 itp
 
         verbs = stats_stanza_pos["VERB"]
-        nouns = stats_stanza_pos["NOUN"]
+        nouns = stats_stanza_pos["NOUN"]+ stats_stanza_pos["PROPN"]
         aux = stats_stanza_pos["AUX"]
+        
+        #aux can be treated in some sentences as sentence builder
+        verbs = verbs+aux 
+
+        # max number of nouns coresponding to first verb
+        max_noun = 12
+        # additional nouns to additional verbs
+        nouns_per_verb = 2
+
+        if verbs < 1:
+            # if sentence does not contain any verb then is not valid
+            return False
+        elif nouns <= max_noun + (verbs - 1) * nouns_per_verb:
+            return True
+        else:
+            return False
+
+import requests, json
+class KRNNTAnalyzer(MorfAnalyzer):
+    def __init__(self):
+        super(KRNNTAnalyzer, self).__init__()
+
+
+        # docker run -p 9003:9003 -it djstrong/krnnt:1.0.0
+        self._url = "http://localhost:9003/?output_format=jsonl"
+
+        self._conv_main_nkjp = lambda x: x[2].split(":")[0]
+        self._conv_main_ud = lambda x: get_main_ud_pos(x[2])
+
+
+    def analyse(self, sentence):
+        """Analyse the sentence and return nkjp pos tags
+        """
+
+        x = requests.post(self._url, data=sentence.encode("utf-8"))
+        resp = x.json()
+        return resp
+
+    def sentence_valid(self, sentence):
+        """Check if the passed txt is valid sentence, should contain min. one verb in proper form"""
+
+        resp = self.analyse(sentence)
+              
+        krnnt_pos = list(map(self._conv_main_ud, resp[0]))
+
+        stats_krnnt_ud = Counter(krnnt_pos)
+   
+        # prosta heurystyka na bazie obserwacji
+        # musi być min. 1 VERB
+        # 1 VERB - max_NOUN 7-10 NOUN
+        # 2 VERB - max_noun+2
+        # 3 verb - max_noun+4 itp
+
+        verbs = stats_krnnt_ud["VERB"]
+        nouns = stats_krnnt_ud["NOUN"]
+        aux = stats_krnnt_ud["AUX"]
+        
+        #aux can be treated in some sentences as sentence builder
+        verbs = verbs+aux 
 
         # max number of nouns coresponding to first verb
         max_noun = 12

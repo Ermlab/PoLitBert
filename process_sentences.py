@@ -38,7 +38,7 @@ stats, vl, pl = tu.corpus_process_sentence(
     output_file,
     split_each_line_as_doc=corpus_tuple.split_each_line_as_doc,
     check_valid_sentence=corpus_tuple.check_valid_sentence,
-    max_sentence_length=700,
+    max_sentence_length=1000,
 )
 #%%
 from pprint import pprint
