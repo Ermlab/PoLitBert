@@ -29,7 +29,7 @@ corpus_tuple = CorpusProcessingTuple(
 
 input_file = corpus_tuple.file_path
 p = Path(input_file)
-output_file = f"{p.with_suffix('')}_lines_sentence_pl.txt"
+output_file = f"{p.with_suffix('')}_lines_sentence_pl2.txt"
 
 print(f"in file={input_file}\nout file={output_file}")
 
@@ -38,7 +38,7 @@ stats, vl, pl = tu.corpus_process_sentence(
     output_file,
     split_each_line_as_doc=corpus_tuple.split_each_line_as_doc,
     check_valid_sentence=corpus_tuple.check_valid_sentence,
-    max_sentence_length=1000,
+    max_sentence_length=700,
 )
 #%%
 from pprint import pprint

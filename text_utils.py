@@ -96,7 +96,8 @@ def create_nltk_sentence_tokenizer():
         "gł",
         "Takht",
         "tzw",
-        "tzn" "t.zw",
+        "tzn",
+        "t.zw",
         "ewan",
         "tyt",
         "fig",
@@ -125,7 +126,6 @@ def create_nltk_sentence_tokenizer():
         "wz",  # w związku
         "gosp",  #
         "dział",  #
-        "",  #
         "hurt",  #
         "mech",  #
         "wyj",  # wyj
@@ -188,7 +188,8 @@ def create_nltk_sentence_tokenizer():
         "tlum",
         "zob",
         "wym",
-        "w/wym" "pot",
+        "w/wym",
+        "pot",
         "ww",
         "ogł",
         "wyd",
@@ -257,7 +258,8 @@ def create_nltk_sentence_tokenizer():
     ]
 
     administration = [
-        "dz.urz" "póź.zm",  # dziennik urzędowy
+        "dz.urz",  # dziennik urzędowy
+        "póź.zm",
         "rej",  # rejestr, rejestracyjny dowód
         "sygn",  # sygnatura
         "Dz.U",  # dziennik ustaw
@@ -284,8 +286,7 @@ def create_nltk_sentence_tokenizer():
         "pp",
         "gw",
         "dyw",
-        "bryg",
-        #        "br", # brygady
+        "bryg", # brygady
         "ppłk",
         "mar",
         "marsz",
@@ -489,8 +490,7 @@ class StanzaAnalyzer(MorfAnalyzer):
 
         stanza.download("pl")
         self._nlp_pipeline = stanza.Pipeline(
-            "pl", processors="tokenize,pos,lemma", verbose=True,
-            use_gpu=True
+            "pl", processors="tokenize,pos,lemma", verbose=True, use_gpu=True
         )  # initialize neural pipeline
 
         self._conv_stanza_pos = lambda x: [w.pos for w in x.words]
@@ -521,11 +521,11 @@ class StanzaAnalyzer(MorfAnalyzer):
         # 3 verb - max_noun+4 itp
 
         verbs = stats_stanza_pos["VERB"]
-        nouns = stats_stanza_pos["NOUN"]+ stats_stanza_pos["PROPN"]
+        nouns = stats_stanza_pos["NOUN"] + stats_stanza_pos["PROPN"]
         aux = stats_stanza_pos["AUX"]
-        
-        #aux can be treated in some sentences as sentence builder
-        verbs = verbs+aux 
+
+        # aux can be treated in some sentences as sentence builder
+        verbs = verbs + aux
 
         # max number of nouns coresponding to first verb
         max_noun = 12
@@ -540,18 +540,19 @@ class StanzaAnalyzer(MorfAnalyzer):
         else:
             return False
 
+
 import requests, json
+
+
 class KRNNTAnalyzer(MorfAnalyzer):
     def __init__(self):
         super(KRNNTAnalyzer, self).__init__()
-
 
         # docker run -p 9003:9003 -it djstrong/krnnt:1.0.0
         self._url = "http://localhost:9003/?output_format=jsonl"
 
         self._conv_main_nkjp = lambda x: x[2].split(":")[0]
         self._conv_main_ud = lambda x: get_main_ud_pos(x[2])
-
 
     def analyse(self, sentence):
         """Analyse the sentence and return nkjp pos tags
@@ -565,11 +566,11 @@ class KRNNTAnalyzer(MorfAnalyzer):
         """Check if the passed txt is valid sentence, should contain min. one verb in proper form"""
 
         resp = self.analyse(sentence)
-              
+
         krnnt_pos = list(map(self._conv_main_ud, resp[0]))
 
         stats_krnnt_ud = Counter(krnnt_pos)
-   
+
         # prosta heurystyka na bazie obserwacji
         # musi być min. 1 VERB
         # 1 VERB - max_NOUN 7-10 NOUN
@@ -579,9 +580,9 @@ class KRNNTAnalyzer(MorfAnalyzer):
         verbs = stats_krnnt_ud["VERB"]
         nouns = stats_krnnt_ud["NOUN"]
         aux = stats_krnnt_ud["AUX"]
-        
-        #aux can be treated in some sentences as sentence builder
-        verbs = verbs+aux 
+
+        # aux can be treated in some sentences as sentence builder
+        verbs = verbs + aux
 
         # max number of nouns coresponding to first verb
         max_noun = 12

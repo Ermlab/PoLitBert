@@ -77,6 +77,32 @@ sentences = [
     "Sąd Rejonowy Poznań-Nowe Miasto i Wilda w Poznaniu, IX Wydział Gospodarczy Krajowego Rejestru Sądowego",
     "Na naszych stronach internetowych stosujemy pliki cookies.",
     "Korzystając z naszych serwisów internetowych bez zmiany ustawień przeglądarki wyrażasz zgodę na stosowanie plików cookies zgodnie z Polityką prywatności.",
+    "Na mocy uchwały Rady Powiatu Głogowskiego z dnia 28 marca 2007 r. Nr VI/54/2007 został utworzony zespół publicznych placówek kształcenia ustawicznego i praktycznego o nazwie Głogowskie Centrum Edukacji Zawodowej w Głogowie przy ulicy Piaskowej 1.",
+    "Centrum Kształcenia Ustawicznego w Głogowie - ustawiczne kształcenie, dokształcanie i doskonalenie osób dorosłych.",
+    "- dostrzeganie swojej niepowtarzalności, a także niepowtarzalności innych, szanowanie jej.",
+    "- poznanie różnych środków transportu: lądowego, wodnego, powietrznego.",
+    "- rozpoznawanie drzew po ich liściach i owocach, zbieranie owoców drzew, wzbogacanie nimi kącika przyrody: wykorzystywanie owoców w działalności plastycznej, technicznej, matematycznej, muzycznej oraz w inny, niestandardowy sposób.",
+    "Czytanie bajki Kubuś Puchatek przez Wójta Gminy Wiśniew p. Krzysztofa Kryszczuka.",
+    "PLAN PRACY DYDAKTYCZNEJ NA WRZESIEŃ 2016 W GRUPIE 6-latków Tygryski Tydzień I Przedszkole drugi dom Tydzień III Uliczne sygnały Tydzień II Przedszkole drugi dom Tydzień IV Jesień w lesie Treści programowe",
+    "Dell OptiPlex 9020 Konfiguracja i funkcje komputera Informacja o ostrzeżeniach PRZESTROGA: Napis OSTRZEŻENIE informuje o sytuacjach, w których występuje ryzyko uszkodzenia sprzętu, obrażeń ciała lub śmierci.",
+    "Zasadnicze cele konkursu to m.in. kształtowanie postaw patriotycznych młodzieży poprzez propagowanie i pogłębianie wiedzy o organizacji i działalności Służby Zwycięstwu Polski-Związku Walki Zbrojnej – Armii Krajowej oraz formacji poakowskich na terenie zamojskiego Inspektoratu Armii Krajowej, kultywowanie wartości, ideałów i postaw żołnierzy Polskiego Państwa Podziemnego, zainspirowanie i zachęcanie młodzieży do podjęcia samodzielnych badań nad historią swojej rodziny, środowiska związanego z miejscem zamieszkania",
+    "Z kolei w imieniu organizatora konkursu głos zabrał Prezes ŚZŻAK Okręg Zamość Poseł Sławomir Zawiślak, który przedstawiając efekty tegorocznej, już IX edycji konkursu podziękował za pomoc w jego organizacji Patronom Honorowym, Dyrektorom szkół, nauczycielom, członkom związku w tym Weteranom AK – wszystkim tym, którzy od lat popierają inicjatywę Związku i przyczyniają się do uświetnienia konkursu.",
+    "Na czwartkowym (13.06) kongresie pojawili się Marta Niewczas, podkarpacki pełnomocnik Europy Plus, poseł Janusz Palikot, europoseł Marek Siwiec, Robert Smucz, przewodniczący zarządu okręgu rzeszowsko-tarnobrzeskiego RP i wiceszef Europy Plus na Podkarpaciu oraz jeden z liderów stowarzyszenia Ordynacka Robert Kwiatkowski.",
+    "ochrona ppoż-znaki uzupełniające prom.elektromag.-znaki ostrzeg.",
+    "subst.chem.-znaki kateg.niebezp.",
+    "taśma odradzająca z folii PE telefony alarmowe-tablice urz.elektryczne-znaki informac.",
+    "urz.elektryczne-znaki ostrzeg.",
+    "urz.elektryczne-znaki zakazu pozostałe znaki i tablice",
+    "Wyświetl posty z ostatnich: Wszystkie Posty1 Dzień7 Dni2 Tygodnie1 Miesiąc3 Miesiące6 Miesięcy1 Rok Najpierw StarszeNajpierw Nowsze Zobacz poprzedni temat : Zobacz następny temat",
+    "Na skróty:o nasatakiofftopz poza sojuszufunna wasze zyczenie zakladamy tematynie moge sie zarejestrowaccarna listaregulaminpakty",
+    "3.1) Uprawnienia do wykonywania określonej działalności lub czynności, jeżeli przepisy prawa nakładają obowiązek ich posiadania Zamawiający uzna warunek za spełniony, jeżeli Wykonawca wykaże, iż posiada zezwolenie na wykonywanie działalności ubezpieczeniowej, o którym mowa w Ustawie z dnia 22 maja 2003 r. o działalności ubezpieczeniowej (tekst jednolity Dz. U. z 2013 r. poz. 950 z późn. zm.), a w przypadku gdy rozpoczął on działalność przed wejściem w życie Ustawy z dnia 28 lipca 1990 r. o działalności ubezpieczeniowej (Dz. U. Nr 59, poz. 344 ze zm.) zaświadczenie Ministra Finansów o posiadaniu zgody na wykonywanie działalności ubezpieczeniowej III.3.2) Wiedza i doświadczenie III.3.3) Potencjał techniczny III.3.4) Osoby zdolne do wykonania zamówienia",
+    "Volvo Ocean Race (Wcześniej Whitbread Round the World) jest dla żeglarzy tym, czym dla wielbicieli motosportu 24-godzinny wyścig LeMans, a dla alpinistów zimowe ataki szczytowe.",
+    "W 1973 r. na starcie Whitbread Round the World załogę Copernicusa stanowili: kapitan Zygfryd Perlicki, Zbigniew Puchalski, Bogdan Bogdziński, Ryszard Mackiewicz i Bronisław Tarnacki.",
+    "Możliwość rozliczenia mieszkania w cenie i dopłaty reszty kwoty,",
+    "Obecna na rynku od roku 1976, amerykańska firma ASP (Armament Systems and Procedures, Inc.) to prekursor, a obecnie też lider produkcji najwyższej jakości akcesoriów dla służb mundurowych.",
+    "przyjmowania oświadczeń odstąpienia od zawartych umów sprzedaży na odległość, zgodnie z postanowieniami niniejszego Regulaminu oraz przepisami Rozdziału 4 ustawy z dnia 30 maja 2014 r. o prawach konsumenta, co stanowi prawnie uzasadniony interes Sprzedawcy (podstawa prawna przetwarzania danych: art. 6 ust. 1 lit. f RODO),",
+    
+
 ]
 
 #%% test with morfeusz2
