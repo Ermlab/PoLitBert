@@ -122,6 +122,28 @@ or trainpref is enough
 
 
 
+## Installation
+
+Morfeusz
+* http://morfeusz.sgjp.pl/download/
+
+
+```
+wget -O - http://download.sgjp.pl/apt/sgjp.gpg.key | sudo apt-key add -
+sudo apt-add-repository http://download.sgjp.pl/apt/ubuntu
+sudo apt update
+
+sudo apt install morfeusz2
+
+wget http://download.sgjp.pl/morfeusz/20200510/Linux/18.04/64/morfeusz2-0.4.0-py3.6-Linux-amd64.egg
+easy_install ./morfeusz2-0.4.0-py3.6-Linux-amd64.egg
+```
+
+Install langetect
+* install sudo apt-get install libicu-dev
+
+
+
 ## Acknowledgements
 
 I'd like to express my gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 

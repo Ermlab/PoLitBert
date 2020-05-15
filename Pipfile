@@ -18,6 +18,7 @@ torch = "*"
 stanza = "*"
 spacy = "*"
 tensorflow = "*"
+langdetect = "*"
 
 [packages]
 sentencepiece = "*"
