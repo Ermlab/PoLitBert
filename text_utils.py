@@ -1,6 +1,12 @@
 """Text utils
 
 """
+import json
+import requests
+from enum import Enum
+import stanza
+from abc import ABC, abstractmethod
+import logging
 import sys
 import datetime as dt
 import os
@@ -29,9 +35,6 @@ def get_num_lines(file_path):
     return lines
 
 
-import logging
-
-
 logging.basicConfig(level=logging.ERROR)
 # disable logging from polyglot
 # Detector is not able to detect the language reliably.
@@ -45,7 +48,7 @@ logger_poly.disabled = True
 def check_polish_sentence(sentence):
     """Returns true if sentence is written in polish
     Uses langdetect library and polyglot.
-    
+
     """
 
     # prevent error "input contains invalid UTF-8 around byte"
@@ -336,6 +339,7 @@ def corpus_process_sentence(
     courpus_output_file,
     split_each_line_as_doc,
     check_valid_sentence=False,
+    check_lang_sentence=False,
     max_sentence_length=5000,
 ):
     """
@@ -393,7 +397,7 @@ def corpus_process_sentence(
                             invalid_length_sentences += 1
                             continue
 
-                        if sentence_length > 40 and not check_polish_sentence(sentence):
+                        if (check_lang_sentence and sentence_length > 40 and not check_polish_sentence(sentence)):
                             non_polish += 1
                             non_polish_list.append(sentence)
                             continue
@@ -429,9 +433,6 @@ def corpus_process_sentence(
     }
 
     return stats, non_valid_sentences_list, non_polish_list
-
-
-from abc import ABC, abstractmethod
 
 
 class MorfAnalyzer(ABC):
@@ -480,9 +481,6 @@ class MorfeuszAnalyzer(MorfAnalyzer):
         )
 
 
-import stanza
-
-
 class StanzaAnalyzer(MorfAnalyzer):
     def __init__(self):
         super(StanzaAnalyzer, self).__init__()
@@ -520,7 +518,8 @@ class StanzaAnalyzer(MorfAnalyzer):
         # 3 verb - max_noun+4 itp
 
         verbs = stats_stanza_pos["VERB"]
-        nouns = stats_stanza_pos["NOUN"] + stats_stanza_pos["PROPN"]+ stats_stanza_pos["DET"]
+        nouns = stats_stanza_pos["NOUN"] + \
+            stats_stanza_pos["PROPN"] + stats_stanza_pos["DET"]
         aux = stats_stanza_pos["AUX"]
 
         # aux can be treated in some sentences as sentence builder
@@ -538,9 +537,6 @@ class StanzaAnalyzer(MorfAnalyzer):
             return True
         else:
             return False
-
-
-import requests, json
 
 
 class KRNNTAnalyzer(MorfAnalyzer):
@@ -579,7 +575,8 @@ class KRNNTAnalyzer(MorfAnalyzer):
         verbs = stats_krnnt_ud["VERB"]
 
         # nouns + unknown words + "uch, ech, psst itp"
-        nouns = stats_krnnt_ud["NOUN"]+ stats_krnnt_ud["X"]+ stats_krnnt_ud["INTJ"]
+        nouns = stats_krnnt_ud["NOUN"] + \
+            stats_krnnt_ud["X"] + stats_krnnt_ud["INTJ"]
         aux = stats_krnnt_ud["AUX"]
 
         # aux can be treated in some sentences as sentence builder
@@ -613,9 +610,6 @@ class KRNNTAnalyzer(MorfAnalyzer):
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-
-from enum import Enum
 
 D_FIELD = Enum(
     "D_FIELD", "flexemes cats special_lemmas special_words default POS FEATURES"
@@ -791,7 +785,7 @@ nkjp_to_ud_dict = {
         },
         "winien": {
             D_FIELD.default.name: {D_FIELD.POS.name: "ADJ"},
-            D_FIELD.special_lemmas.name: [(["powinien"], {D_FIELD.POS.name: "ADJ",})],
+            D_FIELD.special_lemmas.name: [(["powinien"], {D_FIELD.POS.name: "ADJ", })],
         },
         # 'adj':{
         #     D_FIELD.special_lemmas.name: [
@@ -1080,12 +1074,14 @@ nkjp_to_ud_dict = {
         },
         "m2": {
             D_FIELD.default.name: {
-                D_FIELD.FEATURES.name: {("Animacy", "Anim"), ("Gender", "Masc")}
+                D_FIELD.FEATURES.name: {
+                    ("Animacy", "Anim"), ("Gender", "Masc")}
             }
         },
         "m3": {
             D_FIELD.default.name: {
-                D_FIELD.FEATURES.name: {("Animacy", "Inan"), ("Gender", "Masc")}
+                D_FIELD.FEATURES.name: {
+                    ("Animacy", "Inan"), ("Gender", "Masc")}
             }
         },
         "rec": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {}}},
@@ -1114,7 +1110,8 @@ nkjp_to_ud_dict = {
         "loc": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {("Case", "Loc")}}},
         "neg": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {("Polarity", "Neg")}}},
         "npraep": {
-            D_FIELD.default.name: {D_FIELD.FEATURES.name: {("PrepCase", "Npr")}}
+            D_FIELD.default.name: {
+                D_FIELD.FEATURES.name: {("PrepCase", "Npr")}}
         },
         "nwok": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {("Variant", "Short")}}},
         "wok": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {("Variant", "Long")}}},
