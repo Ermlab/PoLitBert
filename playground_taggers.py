@@ -101,6 +101,11 @@ sentences = [
     "Możliwość rozliczenia mieszkania w cenie i dopłaty reszty kwoty,",
     "Obecna na rynku od roku 1976, amerykańska firma ASP (Armament Systems and Procedures, Inc.) to prekursor, a obecnie też lider produkcji najwyższej jakości akcesoriów dla służb mundurowych.",
     "przyjmowania oświadczeń odstąpienia od zawartych umów sprzedaży na odległość, zgodnie z postanowieniami niniejszego Regulaminu oraz przepisami Rozdziału 4 ustawy z dnia 30 maja 2014 r. o prawach konsumenta, co stanowi prawnie uzasadniony interes Sprzedawcy (podstawa prawna przetwarzania danych: art. 6 ust. 1 lit. f RODO),",
+    "Studenci kierunku Architektura Krajobrazu otrzymują przygotowanie z zakresu nauk przyrodniczych, rolniczych, technicznych i sztuk pięknych oraz umiejętności wykorzystania jej w pracy zawodowej z zachowaniem zasad prawnych i estetycznych.",
+    "Poza tym wydział ten zajmuje się sprawami związanymi z realizacją zadań inwestycyjnych i remontowych, przygotowaniem i prowadzeniem procedur przetargowych na realizacją inwestycji i remontów, podejmowaniem działań w celu pozyskiwania zewnętrznych źródeł finansowania działalności inwestycyjnej, w tym opracowywaniem stosownych wniosków oraz koordynowaniem spraw związanych ze sprawozdawczością i rozliczaniem inwestycji.",
+    "Biuro Promocji, Informacji i Rozwoju Powiatu prowadzi sprawy związane z promocją i rozwojem powiatu, współpracą z mediami, planowaniem strategicznym oraz koordynowaniem działań związanych ze współpracą zagraniczną.",
+    "Do głównych zadań Biura Kadr i Płac należy opracowywanie zasad polityki kadrowej i zarządzanie kadrami oraz sporządzanie wykazów etatów i planów rozmieszczenia pracowników.",
+
     
 
 ]

@@ -286,7 +286,7 @@ def create_nltk_sentence_tokenizer():
         "pp",
         "gw",
         "dyw",
-        "bryg", # brygady
+        "bryg",  # brygady
         "ppłk",
         "mar",
         "marsz",
@@ -302,16 +302,15 @@ def create_nltk_sentence_tokenizer():
         "szt",  # sztabowy
         "podinsp",
         "kom",  # komendant, tel. komórka
+        "nadkom"
     ]
 
     extra_abbreviations = (
         extra_abbreviations
         + position_abbrev
-        + roman_abbrev
         + quantity_abbrev
         + place_abbrev
         + actions_abbrev
-        + place_abbrev
         + lang_abbrev
         + administration
         + time
@@ -394,7 +393,7 @@ def corpus_process_sentence(
                             invalid_length_sentences += 1
                             continue
 
-                        if sentence_length > 60 and not check_polish_sentence(sentence):
+                        if sentence_length > 40 and not check_polish_sentence(sentence):
                             non_polish += 1
                             non_polish_list.append(sentence)
                             continue
@@ -521,7 +520,7 @@ class StanzaAnalyzer(MorfAnalyzer):
         # 3 verb - max_noun+4 itp
 
         verbs = stats_stanza_pos["VERB"]
-        nouns = stats_stanza_pos["NOUN"] + stats_stanza_pos["PROPN"]
+        nouns = stats_stanza_pos["NOUN"] + stats_stanza_pos["PROPN"]+ stats_stanza_pos["DET"]
         aux = stats_stanza_pos["AUX"]
 
         # aux can be treated in some sentences as sentence builder
@@ -578,7 +577,9 @@ class KRNNTAnalyzer(MorfAnalyzer):
         # 3 verb - max_noun+4 itp
 
         verbs = stats_krnnt_ud["VERB"]
-        nouns = stats_krnnt_ud["NOUN"]
+
+        # nouns + unknown words + "uch, ech, psst itp"
+        nouns = stats_krnnt_ud["NOUN"]+ stats_krnnt_ud["X"]+ stats_krnnt_ud["INTJ"]
         aux = stats_krnnt_ud["AUX"]
 
         # aux can be treated in some sentences as sentence builder
