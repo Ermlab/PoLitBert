@@ -18,7 +18,7 @@ from collections import namedtuple, Counter
 import itertools
 
 
-import morfeusz2
+#import morfeusz2
 import nltk
 
 from langdetect import detect_langs
