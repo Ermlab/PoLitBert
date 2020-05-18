@@ -18,7 +18,7 @@ from collections import namedtuple, Counter
 import itertools
 
 
-#import morfeusz2
+# import morfeusz2
 import nltk
 
 from langdetect import detect_langs
@@ -305,7 +305,7 @@ def create_nltk_sentence_tokenizer():
         "szt",  # sztabowy
         "podinsp",
         "kom",  # komendant, tel. komórka
-        "nadkom"
+        "nadkom",
     ]
 
     extra_abbreviations = (
@@ -341,6 +341,7 @@ def corpus_process_sentence(
     check_valid_sentence=False,
     check_lang_sentence=False,
     max_sentence_length=5000,
+    krnnt_url="http://localhost:9003"
 ):
     """
     Read corpus_input_file and save each sentence to new line of output file. Do some checks:
@@ -359,7 +360,7 @@ def corpus_process_sentence(
 
     # morf_sent = MorfeuszAnalyzer()
     # morf_sent = StanzaAnalyzer()
-    morf_sent = KRNNTAnalyzer()
+    morf_sent = KRNNTAnalyzer(krnnt_url)
 
     # statistics
     invalid_length_sentences = 0
@@ -397,7 +398,11 @@ def corpus_process_sentence(
                             invalid_length_sentences += 1
                             continue
 
-                        if (check_lang_sentence and sentence_length > 40 and not check_polish_sentence(sentence)):
+                        if (
+                            check_lang_sentence
+                            and sentence_length > 40
+                            and not check_polish_sentence(sentence)
+                        ):
                             non_polish += 1
                             non_polish_list.append(sentence)
                             continue
@@ -518,8 +523,11 @@ class StanzaAnalyzer(MorfAnalyzer):
         # 3 verb - max_noun+4 itp
 
         verbs = stats_stanza_pos["VERB"]
-        nouns = stats_stanza_pos["NOUN"] + \
-            stats_stanza_pos["PROPN"] + stats_stanza_pos["DET"]
+        nouns = (
+            stats_stanza_pos["NOUN"]
+            + stats_stanza_pos["PROPN"]
+            + stats_stanza_pos["DET"]
+        )
         aux = stats_stanza_pos["AUX"]
 
         # aux can be treated in some sentences as sentence builder
@@ -540,11 +548,11 @@ class StanzaAnalyzer(MorfAnalyzer):
 
 
 class KRNNTAnalyzer(MorfAnalyzer):
-    def __init__(self):
+    def __init__(self, url="http://localhost:9003"):
         super(KRNNTAnalyzer, self).__init__()
 
         # docker run -p 9003:9003 -it djstrong/krnnt:1.0.0
-        self._url = "http://localhost:9003/?output_format=jsonl"
+        self._url = f"{url}/?output_format=jsonl"
 
         self._conv_main_nkjp = lambda x: x[2].split(":")[0]
         self._conv_main_ud = lambda x: get_main_ud_pos(x[2])
@@ -575,8 +583,7 @@ class KRNNTAnalyzer(MorfAnalyzer):
         verbs = stats_krnnt_ud["VERB"]
 
         # nouns + unknown words + "uch, ech, psst itp"
-        nouns = stats_krnnt_ud["NOUN"] + \
-            stats_krnnt_ud["X"] + stats_krnnt_ud["INTJ"]
+        nouns = stats_krnnt_ud["NOUN"] + stats_krnnt_ud["X"] + stats_krnnt_ud["INTJ"]
         aux = stats_krnnt_ud["AUX"]
 
         # aux can be treated in some sentences as sentence builder
@@ -785,7 +792,7 @@ nkjp_to_ud_dict = {
         },
         "winien": {
             D_FIELD.default.name: {D_FIELD.POS.name: "ADJ"},
-            D_FIELD.special_lemmas.name: [(["powinien"], {D_FIELD.POS.name: "ADJ", })],
+            D_FIELD.special_lemmas.name: [(["powinien"], {D_FIELD.POS.name: "ADJ",})],
         },
         # 'adj':{
         #     D_FIELD.special_lemmas.name: [
@@ -1074,14 +1081,12 @@ nkjp_to_ud_dict = {
         },
         "m2": {
             D_FIELD.default.name: {
-                D_FIELD.FEATURES.name: {
-                    ("Animacy", "Anim"), ("Gender", "Masc")}
+                D_FIELD.FEATURES.name: {("Animacy", "Anim"), ("Gender", "Masc")}
             }
         },
         "m3": {
             D_FIELD.default.name: {
-                D_FIELD.FEATURES.name: {
-                    ("Animacy", "Inan"), ("Gender", "Masc")}
+                D_FIELD.FEATURES.name: {("Animacy", "Inan"), ("Gender", "Masc")}
             }
         },
         "rec": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {}}},
@@ -1110,8 +1115,7 @@ nkjp_to_ud_dict = {
         "loc": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {("Case", "Loc")}}},
         "neg": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {("Polarity", "Neg")}}},
         "npraep": {
-            D_FIELD.default.name: {
-                D_FIELD.FEATURES.name: {("PrepCase", "Npr")}}
+            D_FIELD.default.name: {D_FIELD.FEATURES.name: {("PrepCase", "Npr")}}
         },
         "nwok": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {("Variant", "Short")}}},
         "wok": {D_FIELD.default.name: {D_FIELD.FEATURES.name: {("Variant", "Long")}}},

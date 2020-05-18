@@ -15,9 +15,7 @@ import argparse
 parser = argparse.ArgumentParser(
     description='Process raw corpus txt file, split to lines, check is sentence is valid, remove to  short and to long sentences and save to file with suffix "_lines"'
 )
-parser.add_argument(
-    "corpus_file", type=str, help="corpus txt raw input file"
-)
+parser.add_argument("corpus_file", type=str, help="corpus txt raw input file")
 
 
 parser.add_argument(
@@ -37,7 +35,6 @@ parser.add_argument(
 )
 
 
-
 parser.add_argument(
     "-ls",
     "--check_lang_sentence",
@@ -54,6 +51,14 @@ parser.add_argument(
     help="remove longer(in chars) sentences",
 )
 
+parser.add_argument(
+    "-u",
+    "--krnnt_pos_url",
+    type=str,
+    default="http://localhost:9003",
+    help="KRNNT pos tagger docker url",
+)
+
 
 args = parser.parse_args()
 
@@ -61,7 +66,6 @@ args = parser.parse_args()
 #%%
 
 corpus_oscar_raw = args.corpus_file
-
 
 
 p = Path(corpus_oscar_raw)
@@ -80,6 +84,7 @@ stats, vl, pl = tu.corpus_process_sentence(
     check_valid_sentence=args.check_valid_sentence,
     check_lang_sentence=args.check_lang_sentence,
     max_sentence_length=args.max_sentence_length,
+    krnnt_url=args.krnnt_pos_url,
 )
 
 end = dt.datetime.now()
