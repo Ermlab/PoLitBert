@@ -552,7 +552,7 @@ class KRNNTAnalyzer(MorfAnalyzer):
         super(KRNNTAnalyzer, self).__init__()
 
         # docker run -p 9003:9003 -it djstrong/krnnt:1.0.0
-        self._url = f'{url}/?output_format=jsonl"
+        self._url = f"{url}/?output_format=jsonl"
 
         self._conv_main_nkjp = lambda x: x[2].split(":")[0]
         self._conv_main_ud = lambda x: get_main_ud_pos(x[2])
