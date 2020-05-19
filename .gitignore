@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 */gw_nas/*
-*/data/corpus_raw/*
+**/data/corpus_raw/*
+data/wiki_dump/*

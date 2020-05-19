@@ -341,7 +341,7 @@ def corpus_process_sentence(
     check_valid_sentence=False,
     check_lang_sentence=False,
     max_sentence_length=5000,
-    krnnt_url="http://localhost:9003"
+    krnnt_url="http://localhost:9003",
 ):
     """
     Read corpus_input_file and save each sentence to new line of output file. Do some checks:
@@ -560,15 +560,22 @@ class KRNNTAnalyzer(MorfAnalyzer):
     def analyse(self, sentence):
         """Analyse the sentence and return nkjp pos tags
         """
+        try:
+            x = requests.post(self._url, data=sentence.encode("utf-8"))
+            resp = x.json()
 
-        x = requests.post(self._url, data=sentence.encode("utf-8"))
-        resp = x.json()
+        except json.decoder.JSONDecodeError:
+            return None
+
         return resp
 
     def sentence_valid(self, sentence):
         """Check if the passed txt is valid sentence, should contain min. one verb in proper form"""
 
         resp = self.analyse(sentence)
+
+        if resp is None:
+            return False
 
         krnnt_pos = list(map(self._conv_main_ud, resp[0]))
 
