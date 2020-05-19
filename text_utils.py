@@ -26,6 +26,9 @@ from langdetect import detect_langs
 from polyglot.detect import Detector
 
 
+import warnings
+warnings.filterwarnings('ignore')
+
 def get_num_lines(file_path):
     fp = open(file_path, "r+")
     buf = mmap.mmap(fp.fileno(), 0)
