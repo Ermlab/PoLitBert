@@ -10,14 +10,26 @@ Polish RoBERTA model trained on Polish Wikipedia, Polish literature, Oscar.
 Data
 
 * [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/)
-* [Polish OpenSubtitles](https://object.pouta.csc.fi/OPUS-OpenSubtitles/v2018/mono/pl.txt.gz)
+* [Polish private book corpus]
 * [Polish part Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz)
+
+todo:
+* [Polish OpenSubtitles](https://object.pouta.csc.fi/OPUS-OpenSubtitles/v2018/mono/pl.txt.gz)
+
+
+## Data preprocess
+
+All detail information are in notebooks [polish_process_data.ipynb](polish_process_data.ipynb)
+
+We preprocessd Oscar dedup data remove non-polish sentences and remove non-valid sentences (without verbs and with to many nouns)
 
 
 ## Pretrainde models
 
 
-### Polish Wikipedia Cased
+### Polish Wikipedia Cased model
+
+Small model for testing trainning procedure
 
 Data: [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/)
 Extracted data to corpus_wikipedia_2020-02-01.txt (~2.7GB)
@@ -47,33 +59,15 @@ total steps = 125K
 Learning rate shedule = linear
 warmup =10k
 max_lr=0.0005
-Tensorboard logs: https://tensorboard.dev/experiment/GWHpk2p1TX2kG9jjvjYtRw
-triangular: https://tensorboard.dev/experiment/vkP5c2HDRCqv6WTLXfGH8w/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
+
+Tensorboard logs: 
+
+* https://tensorboard.dev/experiment/GWHpk2p1TX2kG9jjvjYtRw
+* triangular: https://tensorboard.dev/experiment/vkP5c2HDRCqv6WTLXfGH8w/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
 
 
 
 Fairseq-train command:
-
-```
-TOTAL_UPDATES=125000    # Total number of training steps
-WARMUP_UPDATES=10000    # Warmup the learning rate over this many updates
-PEAK_LR=0.0005          # Peak learning rate, adjust as needed
-TOKENS_PER_SAMPLE=512   # Max sequence length
-MAX_POSITIONS=512       # Num. positional embeddings (usually same as above)
-MAX_SENTENCES=16        # Number of sequences per batch (batch size) need 16GB GPU RAM
-UPDATE_FREQ=16          # Increase the batch size 16x
-
-fairseq-train --fp16 $DATA_DIR \
-    --task masked_lm --criterion masked_lm \
-    --arch roberta_base --sample-break-mode complete --tokens-per-sample $TOKENS_PER_SAMPLE \
-    --optimizer adam --adam-betas '(0.9,0.98)' --adam-eps 1e-6 --clip-norm 0.0 \
-    --lr-scheduler polynomial_decay --lr $PEAK_LR --warmup-updates $WARMUP_UPDATES --total-num-update $TOTAL_UPDATES \
-    --dropout 0.1 --attention-dropout 0.1 --weight-decay 0.01 \
-    --max-sentences $MAX_SENTENCES --update-freq $UPDATE_FREQ \
-    --max-update $TOTAL_UPDATES --log-format simple --log-interval 1 --skip-invalid-size-inputs-valid-test \
-    --save-dir $SAVE_DIR --tensorboard-logdir $LOGS_DIR
-
-```
 
 
 
@@ -81,15 +75,14 @@ fairseq-train --fp16 $DATA_DIR \
 ## Training Fairseq Polish RoBERTA from scratch
 
 
-
 1. Prepare huge text file 'data.txt' with Wikipedia text, each wiki article is separated by new line
 
 
 1. Prepare huge text file 'data.txt' with: 
 
- * Wikipedia text (2.7GB), 
- * Polish books (4.5GB) 
- * Oscar corpus (47GB)
+ * Wikipedia text (1.7GB), 
+ * Polish books (6.5GB) 
+ * Oscar corpus   (47GB)
  
  each wiki article is separated by new line
 
@@ -147,5 +140,10 @@ Install langetect
 ## Acknowledgements
 
 I'd like to express my gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
-Also appreciate the help from Simone Francia (@simonefrancia) form Musixmatch for his [detailed explanations how they trained Roberta](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
+
+Also appreciate the help from:
+
+- Simone Francia (@simonefrancia) form Musixmatch for his [detailed explanations how they trained Roberta](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
+- Piotr z Allegro (todo)
+- blog post how to train polish roberta
 
