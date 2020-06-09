@@ -87,10 +87,10 @@ Install NVIDIA apex
 cd herbert
 pipenv shell
 
-cd ../tools/
+cd /libs/
 git clone https://github.com/NVIDIA/apex
 cd apex
-CUDA_HOME=/usr/local/cuda-10.1/ pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+CUDA_HOME=/usr/local/cuda/ pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 ```
 
 run trainning
@@ -115,5 +115,5 @@ ssh -A -t -i ~/.ssh/aws_key  ubuntu@ubuntu@ec2-54-154-227-149.eu-west-1.compute.
 Copy checkpoint
 
 ```
-scp -i ~/.ssh/aws-ml-ec2.pem ubuntu@ec2-54-229-85-20.eu-west-1.compute.amazonaws.com:/mnt/efs/fs1/bert_model/checkpoints/wiki_model/checkpoint127.pt ./
+scp -i ~/.ssh/aws_key ubuntu@ec2-54-229-85-20.eu-west-1.compute.amazonaws.com:/mnt/efs/fs1/bert_model/checkpoints/wiki_model/checkpoint127.pt ./
 ```
