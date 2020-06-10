@@ -1,4 +1,12 @@
 
+## Base image
+
+
+[Ubuntu 18 Deep learning Base](https://aws.amazon.com/marketplace/pp/Amazon-Web-Services-Deep-Learning-Base-AMI-Amazon-/B077GFM7L7)
+
+* you do not have to remove conda :)
+* install all libraries on your own
+
 
 ## AWS p3 prepare
 
