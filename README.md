@@ -65,7 +65,10 @@ Tensorboard logs:
 * https://tensorboard.dev/experiment/GWHpk2p1TX2kG9jjvjYtRw
 * triangular: https://tensorboard.dev/experiment/vkP5c2HDRCqv6WTLXfGH8w/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
 
+* wikipedia cased, vocab 32k, 125K setps, bsz=1024 - linear schedule https://tensorboard.dev/experiment/GWHpk2p1TX2kG9jjvjYtRw/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
 
+* wikipedia dump 02.2020 (1,5GB), vocab 32k, uncased, triangular learning rate lr=0.0001 max_lr=0.001 step=5000, shrink=0.6 bsz=1024 https://tensorboard.dev/experiment/vkP5c2HDRCqv6WTLXfGH8w/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
+* vocab 32k, cased,cos learning rate exp 3, WARMUP_UPDATES=1000 lr=5e-5 max_lr=5e-4 https://tensorboard.dev/experiment/FvDKtnGnSkG6PRd4weAT4Q/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
 
 Fairseq-train command:
 
