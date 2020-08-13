@@ -1,20 +1,15 @@
-# Herbert - Polish RoBERTA model
+# PoLitBert - Polish RoBERTA model 
 
 
-[Named after great polish poet Zbigniew Herbert](https://en.wikipedia.org/wiki/Zbigniew_Herbert)
-
-
-Polish RoBERTA model trained on Polish Wikipedia, Polish literature, Oscar.
+Polish RoBERTA model trained on Polish Wikipedia, Polish literature and Oscar.
 
 
 Data
 
-* [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/)
-* [Polish private book corpus]
-* [Polish part Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz)
+* [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/) (1.5GB)
+* [Polish private book corpus] (6GB)
+* [Polish part Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) 
 
-todo:
-* [Polish OpenSubtitles](https://object.pouta.csc.fi/OPUS-OpenSubtitles/v2018/mono/pl.txt.gz)
 
 
 ## Data preprocess
@@ -48,34 +43,8 @@ Split **corpus_wikipedia_2020-02-01.txt**
 * [corpus_wikipedia_2020-02-01_valid.txt]() (10%) - lines from 3500002 - 3950001
 * [corpus_wikipedia_2020-02-01_test.txt]()  (10%) - lines from 3950001 - 4355333
 
-Model file: ??
 
-GPU - aws p3.8xlarge (4 GPU)
-
-Trainning protocol:
-
-Efective batch size = 16*16*4 = 1024
-total steps = 125K
-Learning rate shedule = linear
-warmup =10k
-max_lr=0.0005
-
-Tensorboard logs: 
-
-* https://tensorboard.dev/experiment/GWHpk2p1TX2kG9jjvjYtRw
-* triangular: https://tensorboard.dev/experiment/vkP5c2HDRCqv6WTLXfGH8w/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
-
-* wikipedia cased, vocab 32k, 125K setps, bsz=1024 - linear schedule https://tensorboard.dev/experiment/GWHpk2p1TX2kG9jjvjYtRw/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
-
-* wikipedia dump 02.2020 (1,5GB), vocab 32k, uncased, triangular learning rate lr=0.0001 max_lr=0.001 step=5000, shrink=0.6 bsz=1024 https://tensorboard.dev/experiment/vkP5c2HDRCqv6WTLXfGH8w/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
-* vocab 32k, cased,cos learning rate exp 3, WARMUP_UPDATES=1000 lr=5e-5 max_lr=5e-4 https://tensorboard.dev/experiment/FvDKtnGnSkG6PRd4weAT4Q/#scalars&tagFilter=lr%7C.*loss%24%7Cppl
-
-Fairseq-train command:
-
-
-
-
-## Training Fairseq Polish RoBERTA from scratch
+## Training Fairseq Polish RoBERTA from scratch protocol
 
 
 1. Prepare huge text file 'data.txt' with Wikipedia text, each wiki article is separated by new line
@@ -89,14 +58,14 @@ Fairseq-train command:
  
  each wiki article is separated by new line
 
-2. Take 20M lines and prepare another file for sentencpiece, where each sentence is in one line. 
+1. Take 20M lines and prepare another file for sentencpiece, where each sentence is in one line. 
 
-3. Train sentencepiece vocabulary. 
+1. Train sentencepiece vocabulary. 
 Do you use default mapping for custom symbols Unknown (<unk>), BOS (<s>) and EOS </s>) or add others eg. <pad> or <mask> https://github.com/google/sentencepiece/blob/master/doc/special_symbols.md
 
-4. Parse vocabulary and save it in fairseq format vocab.fairseq.txt
-5. Encode 'data.txt' with trained sentencepiece model data.sp.txt
-6. preprocsse data.sp.txt with fairseq-preproces
+1. Parse vocabulary and save it in fairseq format vocab.fairseq.txt
+1. Encode 'data.txt' with trained sentencepiece model data.sp.txt
+1. preprocsse data.sp.txt with fairseq-preproces
 ```
 fairseq-preprocess \
     --only-source \
@@ -141,6 +110,9 @@ Install langetect
 
 
 ## Acknowledgements
+
+This is the joint work of companies [Ermlab Software](https://ermlab.com) and [Literacka](https://literacka.com.pl)
+
 
 I'd like to express my gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
 
