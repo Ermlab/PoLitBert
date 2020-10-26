@@ -78,7 +78,7 @@ source ~/.profile
 clone the herbert repo
 
 ```
-git clone https://github.com/Ermlab/herbert.git
+git clone https://github.com/Ermlab/politbert.git
 git checkout dev
 ```
 

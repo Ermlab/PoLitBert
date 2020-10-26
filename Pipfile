@@ -13,11 +13,9 @@ pandas = "*"
 matplotlib = "*"
 black = "*"
 autopep8 = "*"
-flair = "*"
 torch = "*"
 stanza = "*"
 spacy = "*"
-tensorflow = "*"
 langdetect = "*"
 
 [packages]
