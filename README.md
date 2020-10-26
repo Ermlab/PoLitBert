@@ -1,111 +1,110 @@
 # PoLitBert - Polish RoBERTA model 
 
-
 Polish RoBERTA model trained on Polish Wikipedia, Polish literature and Oscar.
+Major assumption that good quality text will give good quality model.
+
+### Experimments setup and goals
+
+TODO: @ksopyla
 
 
-Data
+## Data
 
-* [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/) (1.5GB)
+* [polish wikipedia dump 03.2020](https://dumps.wikimedia.org/plwiki/20200301/) (1.5GB)
 * [Polish private book corpus] (6GB)
-* [Polish part Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) 
+* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences, keep only valid sentences etc.)( [Cleand Polish Oscar details]() )
 
 
+### Preprocess polish data for training
 
-## Data preprocess
+TODO: @ksopyla
+
+* TODO: uplod to gcloud [clean and split preprocess polish wikipedia dump 03.2020]()
+* TODO: add links clean and split Polish Oscar corpus
+    * [corpus_oscar_2020-04-10_32M_lines.txt]()
+    * corpus_oscar_2020-04-10_64M_lines.txt (11GB)
+    * corpus_oscar_2020-04-10_96M_lines.txt (11GB)
+    * [corpus_oscar_2020-04-10_128M_lines.txt](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_128M_lines.txt) (11GB)
+    * corpus_oscar_2020-04-10_128M_above_lines.txt (5.8G)
+
+
+### Data processing
 
 All detail information are in notebooks [polish_process_data.ipynb](polish_process_data.ipynb)
 
 We preprocessd Oscar dedup data remove non-polish sentences and remove non-valid sentences (without verbs and with to many nouns)
 
+## Pretrained models and vocabs
 
-## Pretrainde models
+
+* vocab 32K cased 50k stpes (wielkie i małe) 
+    * different schedulers linear, tri, cosine
+* vocab 32K cased 125k steps linear scheduler
+* vocab 50K cased 50k steps (linear)
 
 
-### Polish Wikipedia Cased model
+https://docs.google.com/spreadsheets/d/1fBhELqDB1kAxLCBvzeVM4OhqO4zx-meRUVljK1YZfF8/edit#gid=0
 
-Small model for testing trainning procedure
 
-Data: [polish wikipedia dump 02.2020](https://dumps.wikimedia.org/plwiki/20200101/)
-Extracted data to corpus_wikipedia_2020-02-01.txt (~2.7GB)
+### KLEJ evaluation
 
-Vocabulary: BPE(sentencepiece) 32000
+TODO: @lsawaniewski
 
-* [vocab model file](/data/wiki_model/vocab/wikipedia_upper_voc_32000_sen10000000.model)
-* [vocab file](/data/wiki_model/vocab/wikipedia_upper_voc_32000_sen10000000.vocab)
-* [vocab file - fairseq format](/data/wiki_model/vocab/wikipedia_upper_voc_32000_sen10000000_fair.vocab)
 
-Data preparation:
+Tabela z wynikami (naszymi dla poszczególnych modeli
 
-Split **corpus_wikipedia_2020-02-01.txt**
 
-* [corpus_wikipedia_2020-02-01_train.txt]() (80%) - lines from 0 -3500002
-* [corpus_wikipedia_2020-02-01_valid.txt]() (10%) - lines from 3500002 - 3950001
-* [corpus_wikipedia_2020-02-01_test.txt]()  (10%) - lines from 3950001 - 4355333
+Link do leader board KLEJ z naszymi modelami (gdy już będzie wszystko opisane)
+
 
 
 ## Training Fairseq Polish RoBERTA from scratch protocol
 
+TODO: @lsawaniewski
+
+Data preparation for fairsec (vocab gen and binarization) [polish_roberta_vocab.ipynb](polish_roberta_vocab.ipynb)
+
+Commands for fairsec treaning [polish_roberta_training.ipynb](polish_roberta_training.ipynb)
+
 
 1. Prepare huge text file 'data.txt' with Wikipedia text, each wiki article is separated by new line
-
-
-1. Prepare huge text file 'data.txt' with: 
-
- * Wikipedia text (1.7GB), 
- * Polish books (6.5GB) 
- * Oscar corpus   (47GB)
- 
- each wiki article is separated by new line
-
+1. Prepare huge text file 'data.txt' eg.  Wikipedia text (1.7GB), each sentence in a new line and each article is separated by two new lines
 1. Take 20M lines and prepare another file for sentencpiece, where each sentence is in one line. 
-
 1. Train sentencepiece vocabulary. 
-Do you use default mapping for custom symbols Unknown (<unk>), BOS (<s>) and EOS </s>) or add others eg. <pad> or <mask> https://github.com/google/sentencepiece/blob/master/doc/special_symbols.md
-
 1. Parse vocabulary and save it in fairseq format vocab.fairseq.txt
 1. Encode 'data.txt' with trained sentencepiece model data.sp.txt
 1. preprocsse data.sp.txt with fairseq-preproces
-```
-fairseq-preprocess \
-    --only-source \
-    --srcdict vocab.fairseq.txt \
-    --trainpref data.sp.txt \
-     --destdir data-bin/wikitext \
-    --workers 60
-```
+1. Run training 
 
-Do I have to provide 
-```
- --trainpref wikitext-103-raw/wiki.train.bpe \
- --validpref wikitext-103-raw/wiki.valid.bpe \
- --testpref wikitext-103-raw/wiki.test.bpe \
-```
-or trainpref is enough
 
-7. Run training 
+### Training reserch log and tensorboards
+
+@lsawaniewski
 
 
 
-## Installation
-
-Morfeusz
-* http://morfeusz.sgjp.pl/download/
+Postanowiliśmy także udostępnić nasze zestawienie uruchamianych modeli (plik excel)
 
 
-```
-wget -O - http://download.sgjp.pl/apt/sgjp.gpg.key | sudo apt-key add -
-sudo apt-add-repository http://download.sgjp.pl/apt/ubuntu
-sudo apt update
+https://docs.google.com/spreadsheets/d/1fBhELqDB1kAxLCBvzeVM4OhqO4zx-meRUVljK1YZfF8/edit#gid=0
 
-sudo apt install morfeusz2
 
-wget http://download.sgjp.pl/morfeusz/20200510/Linux/18.04/64/morfeusz2-0.4.0-py3.6-Linux-amd64.egg
-easy_install ./morfeusz2-0.4.0-py3.6-Linux-amd64.egg
-```
+Linki do poszczególnych tensorboards dla modeli
 
-Install langetect
-* install sudo apt-get install libicu-dev
+
+
+
+
+
+
+## Used libraries
+
+
+* KRNNT 
+* langetect
+    * install sudo apt-get install libicu-dev
+* polyglot
+* sentencepiece
 
 
 
@@ -117,7 +116,6 @@ This is the joint work of companies [Ermlab Software](https://ermlab.com) and [L
 I'd like to express my gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
 
 Also appreciate the help from:
-
 - Simone Francia (@simonefrancia) form Musixmatch for his [detailed explanations how they trained Roberta](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
 - Piotr z Allegro (todo)
 - blog post how to train polish roberta
