@@ -1,6 +1,6 @@
 # PoLitBert - Polish RoBERTA model 
 
-Polish RoBERTA model trained on Polish Wikipedia, Polish literature and Oscar.
+Polish RoBERTA model trained on Polish Wikipedia. Polish literature and Oscar.
 Major assumption that good quality text will give good quality model.
 
 ### Experimments setup and goals
@@ -12,7 +12,7 @@ TODO: @ksopyla
 
 * [polish wikipedia dump 03.2020](https://dumps.wikimedia.org/plwiki/20200301/) (1.5GB)
 * [Polish private book corpus] (6GB)
-* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences, keep only valid sentences etc.)( [Cleand Polish Oscar details]() )
+* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences. keep only valid sentences etc.)( [Cleand Polish Oscar details]() )
 
 
 ### Preprocess polish data for training
@@ -38,7 +38,7 @@ We preprocessd Oscar dedup data remove non-polish sentences and remove non-valid
 
 
 * vocab 32K cased 50k stpes (wielkie i małe) 
-    * different schedulers linear, tri, cosine
+    * different schedulers linear. tri. cosine
 * vocab 32K cased 125k steps linear scheduler
 * vocab 50K cased 50k steps (linear)
 
@@ -50,12 +50,25 @@ https://docs.google.com/spreadsheets/d/1fBhELqDB1kAxLCBvzeVM4OhqO4zx-meRUVljK1YZ
 
 TODO: @lsawaniewski
 
+All models were evaluated with 9 [KLEJ benchmark](https://klejbenchmark.com/) tasks. 
+Below results were achieved with use of fine-tuning scripts from 
+[Polish RoBERTa](https://github.com/sdadas/polish-roberta#evaluation) without any further tweaks. which suggests that 
+the potential of the models may not been fully utilized yet.
 
-Tabela z wynikami (naszymi dla poszczególnych modeli
 
+| Model                                | NKJP-NER | CDSC-E | CDSC-R |  CBD | PolEmo2.0-IN | PolEmo2.0-OUT |  DYK |  PSC |  AR  |  Avg  |
+|--------------------------------------|:--------:|:------:|:------:|:----:|:------------:|:-------------:|:----:|:----:|:----:|:-----:|
+| wiki_books_oscar_32k_linear          |     92.3 |   91.5 |   92.2 |   64 |         89.8 |          76.1 | 60.2 | 97.9 | 87.6 | 83.51 |
+| wiki_books_oscar_32k_linear_2ep      |     91.9 |   91.8 |   90.9 | 64.6 |         89.1 |          75.9 | 59.8 | 97.9 | 87.9 | 83.31 |
+| wiki_books_oscar_32k_tri_full        |     93.6 |   91.7 |   91.8 | 62.4 |         90.3 |          75.7 |   59 | 97.4 | 87.2 | 83.23 |
+| wiki_books_oscar_32k_linear_full_2ep |     94.3 |   92.1 |   92.8 |   64 |         90.6 |          79.1 | 51.7 | 94.1 | 88.7 | 83.04 |
+| wiki_books_oscar_32k_tri             |     93.9 |   91.7 |   92.1 | 57.6 |         88.8 |          77.9 | 56.6 | 96.5 | 87.7 | 82.53 |
+| wiki_books_oscar_32k_linear_full     |       94 |   91.3 |   91.8 | 61.1 |         90.4 |          78.1 | 50.8 | 95.8 | 88.2 | 82.39 |
+| wiki_books_oscar_50k_linear50k       |     92.8 |   92.3 |   91.7 | 57.7 |         90.3 |          80.6 | 42.2 | 97.4 | 88.5 | 81.50 |
+| wiki_books_oscar_32k_cos1_2          |     92.5 |   91.6 |   90.7 | 60.1 |         89.5 |          73.5 | 49.1 | 95.2 | 87.5 | 81.08 |
+| wiki_books_oscar_32k_cos1_5          |     93.2 |   90.7 |   89.5 | 51.7 |         89.5 |          74.3 | 49.1 | 97.1 | 87.5 | 80.29 |
 
-Link do leader board KLEJ z naszymi modelami (gdy już będzie wszystko opisane)
-
+A comparison with other developed models is available in the continuously updated [leaderboard](https://klejbenchmark.com/leaderboard/) of evaluation tasks.
 
 
 ## Training Fairseq Polish RoBERTA from scratch protocol
@@ -67,9 +80,9 @@ Data preparation for fairsec (vocab gen and binarization) [polish_roberta_vocab.
 Commands for fairsec treaning [polish_roberta_training.ipynb](polish_roberta_training.ipynb)
 
 
-1. Prepare huge text file 'data.txt' with Wikipedia text, each wiki article is separated by new line
-1. Prepare huge text file 'data.txt' eg.  Wikipedia text (1.7GB), each sentence in a new line and each article is separated by two new lines
-1. Take 20M lines and prepare another file for sentencpiece, where each sentence is in one line. 
+1. Prepare huge text file 'data.txt' with Wikipedia text. each wiki article is separated by new line
+1. Prepare huge text file 'data.txt' eg.  Wikipedia text (1.7GB). each sentence in a new line and each article is separated by two new lines
+1. Take 20M lines and prepare another file for sentencpiece. where each sentence is in one line. 
 1. Train sentencepiece vocabulary. 
 1. Parse vocabulary and save it in fairseq format vocab.fairseq.txt
 1. Encode 'data.txt' with trained sentencepiece model data.sp.txt
