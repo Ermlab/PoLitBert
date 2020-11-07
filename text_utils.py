@@ -551,10 +551,16 @@ class StanzaAnalyzer(MorfAnalyzer):
 
 
 class KRNNTAnalyzer(MorfAnalyzer):
+    """KRNNT POS analyzer 
+
+    Note: KRNNT service/server  must be started
+    docker run -p 9003:9003 -it djstrong/krnnt:1.0.0
+
+    """
     def __init__(self, url="http://localhost:9003"):
         super(KRNNTAnalyzer, self).__init__()
 
-        # docker run -p 9003:9003 -it djstrong/krnnt:1.0.0
+        
         self._url = f"{url}/?output_format=jsonl"
 
         self._conv_main_nkjp = lambda x: x[2].split(":")[0]
