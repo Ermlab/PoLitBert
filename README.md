@@ -18,7 +18,7 @@ During experiments we want to examine:
 
 * [polish wikipedia dump 03.2020](https://dumps.wikimedia.org/plwiki/20200301/) (1.5GB)
 * [Polish private book corpus] (6GB)
-* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences. keep only valid sentences etc.)( [Cleand Polish Oscar details]() )
+* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences. keep only valid sentences etc.)( [Cleaned Polish Oscar details]() )
 
 
 ### Data processing for training
@@ -34,19 +34,19 @@ We prepare the few cleaning heuristics:
 * remove ungrammatical sentences (without verbs and with to many nouns)
 * perform sentence tokenization and save each sentence in new line, after each document the  new line was added
 
-Data was cleaned with use of [process_sentences.py](proces_senteces.py) and whole process is implemented in notebook [polish_process_data.ipynb](polish_process_data.ipynb)
+Data was cleaned with use of [process_sentences.py](process_senteces.py) script, whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
 
 
-* [clean and splited polish wikipedia dump 03.2020]()
-* Cleand Polish Oscar corpus
-    * [corpus_oscar_2020-04-10_32M_lines.txt]()
-    * [corpus_oscar_2020-04-10_64M_lines.txt (11GB) ]() 
-    * [corpus_oscar_2020-04-10_96M_lines.txt (11GB)]()
-    * [corpus_oscar_2020-04-10_128M_lines.txt (11GB)](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_128M_lines.txt) 
+* [clean and spited polish wikipedia dump 03.2020]()
+* Cleaned Polish Oscar corpus
+    * [corpus_oscar_2020-04-10_32M_lines.txt 8.6GB](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_32M_lines_train.txt)
+    * [corpus_oscar_2020-04-10_64M_lines.txt (8.6GB) ](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_64M_lines.txt) 
+    * [corpus_oscar_2020-04-10_96M_lines.txt (8.6GB)](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_96M_lines.txt)
+    * [corpus_oscar_2020-04-10_128M_lines.txt (8.6GB)](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_128M_lines.txt) 
     * [corpus_oscar_2020-04-10_128M_above_lines.txt (5.8G)]()
 
 
-Summary of Clean Polis Oscar corpus
+Summary of Cleaned Polish Oscar corpus
 
 
 | File  | All lines   | All sentences   | Invalid length sent. | Non-polish sent.  | Ungrammatical sent.  | Valid sentences |
