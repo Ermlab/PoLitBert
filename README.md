@@ -16,7 +16,7 @@ During experiments we want to examine:
 
 ### Data
 
-* [polish wikipedia dump 03.2020](https://dumps.wikimedia.org/plwiki/20200301/) (1.5GB)
+* Polish Wikipedia dump 03.2020 - archive link https://dumps.wikimedia.org/plwiki/20200301 (not working anymore)
 * [Polish private book corpus] (6GB)
 * Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences. keep only valid sentences etc.)( [Cleaned Polish Oscar details]() )
 
@@ -37,7 +37,7 @@ We prepare the few cleaning heuristics:
 Data was cleaned with use of [process_sentences.py](process_senteces.py) script, whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
 
 
-* [clean and spited polish wikipedia dump 03.2020]()
+* [clean and spited polish wikipedia dump 03.2020 1.5GB](https://storage.googleapis.com/herbert-data/corpus/wikipedia/corpus_wikipedia_2020-03-01_all_lines.txt)
 * Cleaned Polish Oscar corpus
     * [corpus_oscar_2020-04-10_32M_lines.txt 8.6GB](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_32M_lines_train.txt)
     * [corpus_oscar_2020-04-10_64M_lines.txt (8.6GB) ](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_64M_lines.txt) 
@@ -58,14 +58,15 @@ Summary of Cleaned Polish Oscar corpus
 | corpus_oscar_2020-04-10_128M_above_lines.txt| - | - | - | - | -	| - |
 
 
-## Training Fairseq Polish RoBERTA from scratch protocol
+## Training Polish RoBERTA protocol with Fairseq
 
 TODO: @lsawaniewski
 
+
 General recipe of the final data preparation and model training process:
-1. Prepare huge text file _data.txt_ e.g. Wikipedia text (1.7GB) where each sentence in a new line and each article is 
+1. Prepare huge text file _data.txt_ e.g. Wikipedia text, where each sentence is in a new line and each article is 
 separated by two new lines.
-1. Take 10-15M lines and prepare another file for sentencpiece - again, each sentence is in one line.
+1. Take 10-15M lines and prepare another file for sentencpiece (vocabulary builder) - again, each sentence is in one line.
 1. Train sentencepiece vocabulary and save it in fairseq format _vocab.fairseq.txt_.
 1. Encode _data.txt_ with trained sentencepiece model to _data.sp.txt_.
 1. Preprocess _data.sp.txt_ with [fairseq-preprocess](https://fairseq.readthedocs.io/en/latest/command_line_tools.html#fairseq-preprocess).
@@ -123,12 +124,21 @@ Linki do poszczególnych tensorboards dla modeli
 ## Used libraries
 
 
-* KRNNT 
-* langetect
-    * install sudo apt-get install libicu-dev
-* polyglot
+* [KRNNT - Polish morphological tagger.](https://github.com/kwrobel-nlp/krnnt) - we use dockerize version
+* langdetect - for detecting sentence language
+    
+* polyglot - for detecting sentence language
 * sentencepiece
+* [Fairseq v0.9](https://github.com/pytorch/fairseq)
 
+
+### Instalation dependecies and problems
+
+langdetect needs additiona package
+
+* install sudo apt-get install libicu-dev
+
+Sentencepiece was installed from source code.
 
 
 ## Acknowledgements
@@ -136,10 +146,9 @@ Linki do poszczególnych tensorboards dla modeli
 This is the joint work of companies [Ermlab Software](https://ermlab.com) and [Literacka](https://literacka.com.pl)
 
 
-I'd like to express my gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
+We would like to express ours gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
+
 
 Also appreciate the help from:
 - Simone Francia (@simonefrancia) form Musixmatch for his [detailed explanations how they trained Roberta](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
-- Piotr z Allegro (todo)
-- blog post how to train polish roberta
 
