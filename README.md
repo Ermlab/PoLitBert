@@ -46,6 +46,18 @@ Data was cleaned with use of [process_sentences.py](proces_senteces.py) and whol
     * [corpus_oscar_2020-04-10_128M_above_lines.txt (5.8G)]()
 
 
+Summary of Clean Polis Oscar corpus
+
+
+| File  | All lines   | All sentences   | Invalid length sent. | Non-polish sent.  | Ungrammatical sent.  | Valid sentences |
+|-------|-------------|-----------------|----------------------|-------------------|----------------------|---------------|
+| corpus_oscar_2020-04-10_32M_lines.txt | 32 000 506 | 94 332 394 |	1 796 371 |	296 093 | 8 100 750 | 84 139 180 |
+| corpus_oscar_2020-04-10_64M_lines.txt	| 32 000 560 | 96 614 563 | 1 777 586 | 491 789 | 7 869 507	| 86 475 681 |
+| corpus_oscar_2020-04-10_96M_lines.txt	| 32 001 738 | 96 457 553 | 1 796 083 | 302 598 | 7 908 090	| 86 450 782 |
+| corpus_oscar_2020-04-10_128M_lines.txt| 32 002 212 | 97 761 040 | 1 919 071 | 305 924 | 7 891 846	| 87 644 199 |
+| corpus_oscar_2020-04-10_128M_above_lines.txt| - | - | - | - | -	| - |
+
+
 ## Training Fairseq Polish RoBERTA from scratch protocol
 
 TODO: @lsawaniewski
