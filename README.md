@@ -1,38 +1,50 @@
 # PoLitBert - Polish RoBERTA model 
 
-Polish RoBERTA model trained on Polish Wikipedia. Polish literature and Oscar.
-Major assumption that good quality text will give good quality model.
-
-### Experimments setup and goals
-
-TODO: @ksopyla
+Polish RoBERTA model trained on Polish Wikipedia, Polish literature and Oscar.
+Major assumption is that quality text will give good  model.
 
 
-## Data
+## Experiments setup and goals
+
+During experiments we want to examine: 
+
+* impact of different leraning schedulers for training speed and accuracy, tested:
+    * linear schedule with warmup
+    * cyclic schedule: cosine, trinagular
+* impact of training time on final accuracy
+
+
+### Data
 
 * [polish wikipedia dump 03.2020](https://dumps.wikimedia.org/plwiki/20200301/) (1.5GB)
 * [Polish private book corpus] (6GB)
 * Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences. keep only valid sentences etc.)( [Cleand Polish Oscar details]() )
 
 
-### Preprocess polish data for training
+### Data processing for training
 
-TODO: @ksopyla
+Our main assumption is that good quality text  should produce good language model. 
+So far the most popular polish dataset was "Polish wikipedia dump" however this text characterize with formal language. 
+Second source of text is polish part of Oscar corpus - crawled text from the polish internet. When we investigate this coprus with more details it appears that it contains a lot of: foreign sentences (in Russia, English, German etc.), short sentences (less then ) and not grammatical sentences (as words enumerations )
 
-* TODO: uplod to gcloud [clean and split preprocess polish wikipedia dump 03.2020]()
-* TODO: add links clean and split Polish Oscar corpus
+We prepare the few cleaning heuristics:
+
+* remove sentences shorter than
+* remove non polish sentences
+* remove ungrammatical sentences (without verbs and with to many nouns)
+* perform sentence tokenization and save each sentence in new line, after each document the  new line was added
+
+Data was cleaned with use of [process_sentences.py](proces_senteces.py) and whole process is implemented in notebook [polish_process_data.ipynb](polish_process_data.ipynb)
+
+
+* [clean and splited polish wikipedia dump 03.2020]()
+* Cleand Polish Oscar corpus
     * [corpus_oscar_2020-04-10_32M_lines.txt]()
-    * corpus_oscar_2020-04-10_64M_lines.txt (11GB)
-    * corpus_oscar_2020-04-10_96M_lines.txt (11GB)
-    * [corpus_oscar_2020-04-10_128M_lines.txt](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_128M_lines.txt) (11GB)
-    * corpus_oscar_2020-04-10_128M_above_lines.txt (5.8G)
+    * [corpus_oscar_2020-04-10_64M_lines.txt (11GB) ]() 
+    * [corpus_oscar_2020-04-10_96M_lines.txt (11GB)]()
+    * [corpus_oscar_2020-04-10_128M_lines.txt (11GB)](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_128M_lines.txt) 
+    * [corpus_oscar_2020-04-10_128M_above_lines.txt (5.8G)]()
 
-
-### Data processing
-
-We preprocessd Oscar dedup data remove non-polish sentences and remove non-valid sentences (without verbs and with to many nouns).
-
-All detailed information are in notebook [polish_process_data.ipynb](polish_process_data.ipynb).
 
 ## Training Fairseq Polish RoBERTA from scratch protocol
 
