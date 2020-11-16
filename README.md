@@ -34,7 +34,7 @@ We prepare the few cleaning heuristics:
 * remove ungrammatical sentences (without verbs and with to many nouns)
 * perform sentence tokenization and save each sentence in new line, after each document the  new line was added
 
-Data was cleaned with use of [process_sentences.py](process_senteces.py) script, whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
+Data was cleaned with use of [process_sentences.py](process_sentences.py) script, whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
 
 
 * [clean and spited polish wikipedia dump 03.2020 1.5GB](https://storage.googleapis.com/herbert-data/corpus/wikipedia/corpus_wikipedia_2020-03-01_all_lines.txt)
