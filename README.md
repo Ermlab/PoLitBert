@@ -30,21 +30,35 @@ TODO: @ksopyla
 
 ### Data processing
 
-All detail information are in notebooks [polish_process_data.ipynb](polish_process_data.ipynb)
+We preprocessd Oscar dedup data remove non-polish sentences and remove non-valid sentences (without verbs and with to many nouns).
 
-We preprocessd Oscar dedup data remove non-polish sentences and remove non-valid sentences (without verbs and with to many nouns)
+All detailed information are in notebook [polish_process_data.ipynb](polish_process_data.ipynb).
+
+## Training Fairseq Polish RoBERTA from scratch protocol
+
+TODO: @lsawaniewski
+
+General recipe of the final data preparation and model training process:
+1. Prepare huge text file _data.txt_ e.g. Wikipedia text (1.7GB) where each sentence in a new line and each article is 
+separated by two new lines.
+1. Take 10-15M lines and prepare another file for sentencpiece - again, each sentence is in one line.
+1. Train sentencepiece vocabulary and save it in fairseq format _vocab.fairseq.txt_.
+1. Encode _data.txt_ with trained sentencepiece model to _data.sp.txt_.
+1. Preprocess _data.sp.txt_ with [fairseq-preprocess](https://fairseq.readthedocs.io/en/latest/command_line_tools.html#fairseq-preprocess).
+1. Run training. 
+
+Detailed data preparation steps for fairseq (vocab gen and binarization) are available in separate notebook [polish_roberta_vocab.ipynb](polish_roberta_vocab.ipynb).
+
+Commands needed to reproduce fairseq models with various training protocols may be found in [polish_roberta_training.ipynb](polish_roberta_training.ipynb).
 
 ## Pretrained models and vocabs
-
 
 * vocab 32K cased 50k stpes (wielkie i małe) 
     * different schedulers linear. tri. cosine
 * vocab 32K cased 125k steps linear scheduler
 * vocab 50K cased 50k steps (linear)
 
-
 https://docs.google.com/spreadsheets/d/1fBhELqDB1kAxLCBvzeVM4OhqO4zx-meRUVljK1YZfF8/edit#gid=0
-
 
 ### KLEJ evaluation
 
@@ -71,42 +85,15 @@ the potential of the models may not been fully utilized yet.
 A comparison with other developed models is available in the continuously updated [leaderboard](https://klejbenchmark.com/leaderboard/) of evaluation tasks.
 
 
-## Training Fairseq Polish RoBERTA from scratch protocol
-
-TODO: @lsawaniewski
-
-General recipe of the final data preparation and model training process:
-1. Prepare huge text file _data.txt_ e.g. Wikipedia text (1.7GB) where each sentence in a new line and each article is 
-separated by two new lines.
-1. Take 10-15M lines and prepare another file for sentencpiece - again, each sentence is in one line.
-1. Train sentencepiece vocabulary and save it in fairseq format _vocab.fairseq.txt_.
-1. Encode _data.txt_ with trained sentencepiece model to _data.sp.txt_.
-1. Preprocess _data.sp.txt_ with [fairseq-preprocess](https://fairseq.readthedocs.io/en/latest/command_line_tools.html#fairseq-preprocess)
-1. Run training. 
-
-Detailed data preparation steps for fairseq (vocab gen and binarization) are available in separate notebook [polish_roberta_vocab.ipynb](polish_roberta_vocab.ipynb)
-
-Commands needed to reproduce fairseq models with various training protocols may be found in [polish_roberta_training.ipynb](polish_roberta_training.ipynb)
-
-
 ### Training reserch log and tensorboards
 
 @lsawaniewski
 
-
-
 Postanowiliśmy także udostępnić nasze zestawienie uruchamianych modeli (plik excel)
-
 
 https://docs.google.com/spreadsheets/d/1fBhELqDB1kAxLCBvzeVM4OhqO4zx-meRUVljK1YZfF8/edit#gid=0
 
-
 Linki do poszczególnych tensorboards dla modeli
-
-
-
-
-
 
 
 ## Used libraries
