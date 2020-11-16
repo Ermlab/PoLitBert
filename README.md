@@ -75,19 +75,18 @@ A comparison with other developed models is available in the continuously update
 
 TODO: @lsawaniewski
 
-Data preparation for fairsec (vocab gen and binarization) [polish_roberta_vocab.ipynb](polish_roberta_vocab.ipynb)
+General recipe of the final data preparation and model training process:
+1. Prepare huge text file _data.txt_ e.g. Wikipedia text (1.7GB) where each sentence in a new line and each article is 
+separated by two new lines.
+1. Take 10-15M lines and prepare another file for sentencpiece - again, each sentence is in one line.
+1. Train sentencepiece vocabulary and save it in fairseq format _vocab.fairseq.txt_.
+1. Encode _data.txt_ with trained sentencepiece model to _data.sp.txt_.
+1. Preprocess _data.sp.txt_ with [fairseq-preprocess](https://fairseq.readthedocs.io/en/latest/command_line_tools.html#fairseq-preprocess)
+1. Run training. 
 
-Commands for fairsec treaning [polish_roberta_training.ipynb](polish_roberta_training.ipynb)
+Detailed data preparation steps for fairseq (vocab gen and binarization) are available in separate notebook [polish_roberta_vocab.ipynb](polish_roberta_vocab.ipynb)
 
-
-1. Prepare huge text file 'data.txt' with Wikipedia text. each wiki article is separated by new line
-1. Prepare huge text file 'data.txt' eg.  Wikipedia text (1.7GB). each sentence in a new line and each article is separated by two new lines
-1. Take 20M lines and prepare another file for sentencpiece. where each sentence is in one line. 
-1. Train sentencepiece vocabulary. 
-1. Parse vocabulary and save it in fairseq format vocab.fairseq.txt
-1. Encode 'data.txt' with trained sentencepiece model data.sp.txt
-1. preprocsse data.sp.txt with fairseq-preproces
-1. Run training 
+Commands needed to reproduce fairseq models with various training protocols may be found in [polish_roberta_training.ipynb](polish_roberta_training.ipynb)
 
 
 ### Training reserch log and tensorboards
