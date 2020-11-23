@@ -37,7 +37,7 @@ We prepare the few cleaning heuristics:
 Data was cleaned with use of [process_sentences.py](process_sentences.py) script, whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
 
 
-* [clean and spited polish wikipedia dump 03.2020 1.5GB](https://storage.googleapis.com/herbert-data/corpus/wikipedia/corpus_wikipedia_2020-03-01_all_lines.txt)
+* [Polish Wikipedia dump 03.2020 1.5GB](https://storage.googleapis.com/herbert-data/corpus/wikipedia/corpus_wikipedia_2020-03-01_all_lines.txt)
 * Cleaned Polish Oscar corpus
     * [corpus_oscar_2020-04-10_32M_lines.txt 8.6GB](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_32M_lines_train.txt)
     * [corpus_oscar_2020-04-10_64M_lines.txt (8.6GB) ](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_64M_lines.txt) 
