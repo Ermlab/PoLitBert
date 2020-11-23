@@ -120,15 +120,24 @@ the potential of the models may not been fully utilized yet.
 A comparison with other developed models is available in the continuously updated [leaderboard](https://klejbenchmark.com/leaderboard/) of evaluation tasks.
 
 
-### Training reserch log and tensorboards
+### Models reserch log and tensorboards
 
 @lsawaniewski
 
 In addition, we decided to provide a list of launched models with the corresponding tensorboards.
 
-https://docs.google.com/spreadsheets/d/1fBhELqDB1kAxLCBvzeVM4OhqO4zx-meRUVljK1YZfF8/edit#gid=0
-
-Linki do poszczególnych tensorboards dla modeli
+| Experiment                                                                                                                                         | Model name                                                                                                                             | Vocab size | Scheduler                    | BSZ   | WPB      | Steps   | Train tokens | Train loss | Valid loss | Best (test) loss |
+|----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|------------|------------------------------|-------|----------|---------|--------------|------------|------------|------------------|
+| [#1](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-1---linear-decay,-50k-updates)         | wiki_books_oscar_32k_linear - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/KfLdZq1gTYy8pPtKrVuoHw/#scalars)) | 32k        | linear decay                 | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,502 |      1,460 |            1,422 |
+| [#2](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-2---cyclic-triangular,-50k-updates)    | wiki_books_oscar_32k_tri - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/eGmn2nsgQEqqaNvbY3b1kQ/#scalars))    | 32k        | triangular                   | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,473 |      1,436 |            1,402 |
+| [#3](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-3---cyclic-cosine,-50k-updates)        | wiki_books_oscar_32k_cos1 - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/Vg9bGil3QC2fKgnyp7eKRg/))           | 32k        | cosine mul=1                 | 8 192 | 4,07E+06 |  23 030 |     9,37E+10 |     10,930 |     11,000 |            1,832 |
+| [#4](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-4---cyclic-cosine,-50k-updates)        | wiki_books_oscar_32k_cos1_2 - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/ElKrpymrQXKETX4Ea9lLSQ/#scalars)) | 32k        | cosine mul=1 peak=0.0005     | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,684 |      1,633 |            1,595 |
+| [#5](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiments-5,-6,-7---cyclic-cosine,-50k-updates) | wiki_books_oscar_32k_cos1_3 - [fairseq](model_url) ([tensorboard]())                                                                   | 32k        | cosine mul=2                 | 8 192 | 4,07E+06 |   3 735 |     1,52E+10 |     10,930 |            |                  |
+| [#6](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiments-5,-6,-7---cyclic-cosine,-50k-updates) | wiki_books_oscar_32k_cos1_4 - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/fNXEfyauRvSRkxri064RNA/))         | 32k        | cosine mul=2 grad-clip=0.9   | 8 192 | 4,07E+06 |   4 954 |     2,02E+10 |     10,910 |     10,940 |            2,470 |
+| [#8](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-8---cyclic-triangular,-125k-updates)   | wiki_books_oscar_32k_tri_full - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/AldC0VcwQpOPjXhahnvaOw/))       | 32k        | triangular                   | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,435 |      1,313 |            1,363 |
+| [#9](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-9---cyclic-cosine,-125k-updates)       | wiki_books_oscar_32k_cos1_5 - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/jmNv1cOPTpOXLe2slGqEVw/))         | 32k        | cosine, mul=2, grad-clip=0.9 | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,502 |      1,358 |            1,426 |
+| [#10](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-10---linear,-125k-updates)            | wiki_books_oscar_32k_linear_full - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/eOm39Ie9R7e7i4Lh4yqZkA/))    | 32k        | linear decay                 | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,322 |      1,218 |            1,268 |
+| [#11](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-11---vocab50k,-linear,-50k-updates)   | wiki_books_oscar_50k_linear50k - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/CrPwZqAYQpCnK9MBFrBPPA/))      | 50k        | linear decay                 | 8 192 | 4,07E+06 |  50 000 |     2,04E+11 |      1,546 |      1,439 |            1,480 |
 
 
 ## Used libraries
