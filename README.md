@@ -114,7 +114,7 @@ A comparison with other developed models is available in the continuously update
 
 @lsawaniewski
 
-Postanowiliśmy także udostępnić nasze zestawienie uruchamianych modeli (plik excel)
+In addition, we decided to provide a list of launched models with the corresponding tensorboards.
 
 https://docs.google.com/spreadsheets/d/1fBhELqDB1kAxLCBvzeVM4OhqO4zx-meRUVljK1YZfF8/edit#gid=0
 
