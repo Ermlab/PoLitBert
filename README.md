@@ -55,7 +55,18 @@ Summary of Cleaned Polish Oscar corpus
 | corpus_oscar_2020-04-10_64M_lines.txt	| 32 000 560 | 96 614 563 | 1 777 586 | 491 789 | 7 869 507	| 86 475 681 |
 | corpus_oscar_2020-04-10_96M_lines.txt	| 32 001 738 | 96 457 553 | 1 796 083 | 302 598 | 7 908 090	| 86 450 782 |
 | corpus_oscar_2020-04-10_128M_lines.txt| 32 002 212 | 97 761 040 | 1 919 071 | 305 924 | 7 891 846	| 87 644 199 |
-| corpus_oscar_2020-04-10_128M_above_lines.txt| - | - | - | - | -	| - |
+| corpus_oscar_2020-04-10_128M_above_lines.txt|17 519 467| 	53 446 884 | 	1 090 714 |	212 657	| 4 343 296 |	47 800 217  |
+
+
+
+### Training corpus stats
+@lsawaniewski
+
+wiki
+books
+oscar 32M
+
+
 
 
 ## Training Polish RoBERTA protocol with Fairseq
@@ -64,8 +75,7 @@ TODO: @lsawaniewski
 
 
 General recipe of the final data preparation and model training process:
-1. Prepare huge text file _data.txt_ e.g. Wikipedia text, where each sentence is in a new line and each article is 
-separated by two new lines.
+1. Prepare huge text file _data.txt_ e.g. Wikipedia text, where each sentence is in a new line and each article is separated by two new lines.
 1. Take 10-15M lines and prepare another file for sentencpiece (vocabulary builder) - again, each sentence is in one line.
 1. Train sentencepiece vocabulary and save it in fairseq format _vocab.fairseq.txt_.
 1. Encode _data.txt_ with trained sentencepiece model to _data.sp.txt_.
