@@ -120,7 +120,7 @@ the potential of the models may not been fully utilized yet.
 A comparison with other developed models is available in the continuously updated [leaderboard](https://klejbenchmark.com/leaderboard/) of evaluation tasks.
 
 
-### Models reserch log and tensorboards
+### Models, reserch log and tensorboards
 
 @lsawaniewski
 
@@ -137,7 +137,7 @@ In addition, we decided to provide a list of launched models with the correspond
 | [#8](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-8---cyclic-triangular,-125k-updates)   | wiki_books_oscar_32k_tri_full - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/AldC0VcwQpOPjXhahnvaOw/))       | 32k        | triangular                   | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,435 |      1,313 |            1,363 |
 | [#9](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-9---cyclic-cosine,-125k-updates)       | wiki_books_oscar_32k_cos1_5 - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/jmNv1cOPTpOXLe2slGqEVw/))         | 32k        | cosine, mul=2, grad-clip=0.9 | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,502 |      1,358 |            1,426 |
 | [#10](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-10---linear,-125k-updates)            | wiki_books_oscar_32k_linear_full - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/eOm39Ie9R7e7i4Lh4yqZkA/))    | 32k        | linear decay                 | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,322 |      1,218 |            1,268 |
-| [#11](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-11---vocab50k,-linear,-50k-updates)   | wiki_books_oscar_50k_linear50k - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/CrPwZqAYQpCnK9MBFrBPPA/))      | 50k        | linear decay                 | 8 192 | 4,07E+06 |  50 000 |     2,04E+11 |      1,546 |      1,439 |            1,480 |
+| [#11](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-11---vocab50k,-linear,-50k-updates)   | wiki_books_oscar_50k_linear50k - [fairseq](model_url) ([tensorboard](https://tensorboard.dev/experiment/nkYJ7jp1RR2fLCqbGE7Kfw/#scalars))      | 50k        | linear decay                 | 8 192 | 4,07E+06 |  50 000 |     2,04E+11 |      1,546 |      1,439 |            1,480 |
 
 
 ## Used libraries
