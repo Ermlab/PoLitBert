@@ -62,12 +62,21 @@ Summary of Cleaned Polish Oscar corpus
 ### Training corpus stats
 @lsawaniewski
 
-wiki
-books
-oscar 32M
+#### Train
+| Corpus                     | Lines       | Words         | Characters     |
+|----------------------------|-------------|---------------|----------------|
+| Polish Wikipedia (2020-03) |  11 748 343 |   181 560 313 |  1 309 416 493 |
+| Books                      |  81 140 395 |   829 404 801 |  5 386 053 287 |
+| Oscar (part, cleared)      | 112 466 497 | 1 198 735 834 |  8 454 177 161 |
+| Total                      | 205 355 235 | 2 209 700 948 | 15 149 646 941 |
 
-
-
+#### Test
+| Corpus                     | Lines       | Words         | Characters     |
+|----------------------------|-------------|---------------|----------------|
+| Polish Wikipedia (2020-03) |  11 748 343 |   181 560 313 |  1 309 416 493 |
+| Books                      |  81 140 395 |   829 404 801 |  5 386 053 287 |
+| Oscar (part, cleared)      | 112 466 497 | 1 198 735 834 |  8 454 177 161 |
+| Total                      | 205 355 235 | 2 209 700 948 | 15 149 646 941 |
 
 ## Training Polish RoBERTA protocol with Fairseq
 
