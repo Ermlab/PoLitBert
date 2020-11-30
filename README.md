@@ -14,7 +14,7 @@ During experiments we want to examine:
 * impact of training time on final accuracy
 
 
-### Data
+## Data
 
 * Polish Wikipedia dump 03.2020 - archive link https://dumps.wikimedia.org/plwiki/20200301 (not working anymore)
 * [Polish private book corpus] (6GB)
@@ -59,28 +59,30 @@ Summary of Cleaned Polish Oscar corpus
 
 
 
-### Training corpus stats
-@lsawaniewski
+### Training, testing dataset stats
 
-#### Train
-| Corpus                     | Lines       | Words         | Characters     |
+
+
+| Train Corpus                     | Lines       | Words         | Characters     |
 |----------------------------|-------------|---------------|----------------|
 | Polish Wikipedia (2020-03) |  11 748 343 |   181 560 313 |  1 309 416 493 |
 | Books                      |  81 140 395 |   829 404 801 |  5 386 053 287 |
-| Oscar (part, cleared)      | 112 466 497 | 1 198 735 834 |  8 454 177 161 |
+| Oscar (32M part, cleared)      | 112 466 497 | 1 198 735 834 |  8 454 177 161 |
 | Total                      | 205 355 235 | 2 209 700 948 | 15 149 646 941 |
 
-#### Test
-| Corpus                     | Lines      | Words       | Characters    |
+
+For testing we take ~10% of each corpus
+
+| Test Corpus                     | Lines      | Words       | Characters    |
 |----------------------------|------------|-------------|---------------|
 | Polish Wikipedia (2020-03) |  1 305 207 |  21 333 280 |   155 403 453 |
 | Books                      |  9 007 716 |  93 141 853 |   610 111 989 |
-| Oscar (part, cleared)      | 14 515 735 | 157 303 490 | 1 104 855 397 |
+| Oscar (32M part, cleared)      | 14 515 735 | 157 303 490 | 1 104 855 397 |
 | Total                      | 24 828 658 | 271 778 623 | 1 870 370 839 |
 
-## Training Polish RoBERTA protocol with Fairseq
 
-TODO: @lsawaniewski
+
+## Training Polish RoBERTA protocol with Fairseq
 
 
 General recipe of the final data preparation and model training process:
@@ -97,18 +99,26 @@ Commands needed to reproduce fairseq models with various training protocols may 
 
 ## Pretrained models and vocabs
 
-* vocab 32K cased 50k stpes (wielkie i małe) 
-    * different schedulers linear. tri. cosine
-* vocab 32K cased 125k steps linear scheduler
-* vocab 50K cased 50k steps (linear)
 
-https://docs.google.com/spreadsheets/d/1fBhELqDB1kAxLCBvzeVM4OhqO4zx-meRUVljK1YZfF8/edit#gid=0
+## Models and vocab
+
+
+* wiki_books_oscar_32k_linear 
+* wiki_books_oscar_32k_tri
+* wiki_books_oscar_32k_cos1
+* wiki_books_oscar_32k_cos1_2
+* wiki_books_oscar_32k_cos1_3
+* wiki_books_oscar_32k_cos1_4 
+todo: @lsawanieski upload models to gcloud
+
+
+
 
 ### KLEJ evaluation
 
-TODO: @lsawaniewski
 
-All models were evaluated with 9 [KLEJ benchmark](https://klejbenchmark.com/) tasks. 
+
+All models were evaluated at 26.07.2020 with 9 [KLEJ benchmark](https://klejbenchmark.com/) tasks . 
 Below results were achieved with use of fine-tuning scripts from 
 [Polish RoBERTa](https://github.com/sdadas/polish-roberta#evaluation) without any further tweaks. which suggests that 
 the potential of the models may not been fully utilized yet.
@@ -129,11 +139,11 @@ the potential of the models may not been fully utilized yet.
 A comparison with other developed models is available in the continuously updated [leaderboard](https://klejbenchmark.com/leaderboard/) of evaluation tasks.
 
 
-### Models, reserch log and tensorboards
 
-@lsawaniewski
+### Details of models training
 
-In addition, we decided to provide a list of launched models with the corresponding tensorboards.
+
+We believe in open science and knowledge sharing, thus we decided to share complete code, params, experiment details and tensorboards.
 
 | Experiment                                                                                                                                         | Model name                                                                                                                             | Vocab size | Scheduler                    | BSZ   | WPB      | Steps   | Train tokens | Train loss | Valid loss | Best (test) loss |
 |----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|------------|------------------------------|-------|----------|---------|--------------|------------|------------|------------------|
@@ -177,6 +187,20 @@ This is the joint work of companies [Ermlab Software](https://ermlab.com) and [L
 We would like to express ours gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
 
 
-Also appreciate the help from:
-- Simone Francia (@simonefrancia) form Musixmatch for his [detailed explanations how they trained Roberta](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
+### Autors: 
 
+* [Krzysztof Sopyła]((https://www.linkedin.com/in/krzysztofsopyla/))
+* [Łukasz Sawaniewski](https://www.linkedin.com/in/sawaniewski/)
+
+
+### Also appreciate the help from
+
+- [simonefrancia](https://github.com/simonefrancia) form Musixmatch for his [detailed explanations how they trained Roberta](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
+
+
+## About Ermlab Software
+
+Polish machine learning company @[ermlab](https://github.com/ermlab)
+
+
+![](images/ermlab_software.png | width=800)
