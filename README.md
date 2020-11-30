@@ -203,4 +203,5 @@ We would like to express ours gratitude to NVidia Inception Programme and Amazon
 Polish machine learning company @[ermlab](https://github.com/ermlab)
 
 
-![Ermlab Software](/images/ermlab_software.png | width=800)
+<img src="/images/ermlab_software.png" width="800">.
+
