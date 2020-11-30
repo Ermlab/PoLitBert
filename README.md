@@ -3,6 +3,7 @@
 Polish RoBERTA model trained on Polish Wikipedia, Polish literature and Oscar.
 Major assumption is that quality text will give good  model.
 
+We believe in open science and knowledge sharing, thus we decided to share complete code, params, experiment details and tensorboards.
 
 ## Experiments setup and goals
 
@@ -144,6 +145,10 @@ A comparison with other developed models is available in the continuously update
 
 
 We believe in open science and knowledge sharing, thus we decided to share complete code, params, experiment details and tensorboards.
+
+Link to [PoLitBert research log - public](
+https://docs.google.com/spreadsheets/d/1ebVH-otNJM0nCslY0I9aaCytXpwCihGTUDiAmMLz-zc/edit?usp=sharing) (the same as table below).
+
 
 | Experiment                                                                                                                                         | Model name                                                                                                                             | Vocab size | Scheduler                    | BSZ   | WPB      | Steps   | Train tokens | Train loss | Valid loss | Best (test) loss |
 |----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|------------|------------------------------|-------|----------|---------|--------------|------------|------------|------------------|
