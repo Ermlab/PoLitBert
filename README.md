@@ -104,15 +104,13 @@ Commands needed to reproduce fairseq models with various training protocols may 
 ## Models and vocab
 
 
-* wiki_books_oscar_32k_linear 
-* wiki_books_oscar_32k_tri
-* wiki_books_oscar_32k_cos1
-* wiki_books_oscar_32k_cos1_2
-* wiki_books_oscar_32k_cos1_3
-* wiki_books_oscar_32k_cos1_4 
-todo: @lsawanieski upload models to gcloud
-
-
+* [wiki_books_oscar_32k_linear](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_linear.zip) 
+* [wiki_books_oscar_32k_tri](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_tri.zip)
+* [wiki_books_oscar_32k_cos1_2](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_cos1_2.zip)
+* [wiki_books_oscar_32k_tri_full](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_tri_full.zip)
+* [wiki_books_oscar_32k_cos1_5](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_cos1_5.zip)
+* [wiki_books_oscar_32k_linear_full](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_linear_full.zip)
+* [wiki_books_oscar_50k_linear50k](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_50k_linear50k.zip)
 
 
 ### KLEJ evaluation
@@ -167,7 +165,7 @@ https://docs.google.com/spreadsheets/d/1ebVH-otNJM0nCslY0I9aaCytXpwCihGTUDiAmMLz
 ## Used libraries
 
 
-* [KRNNT - Polish morphological tagger.](https://github.com/kwrobel-nlp/krnnt) - we use dockerize version
+* [KRNNT - Polish morphological tagger.](https://github.com/kwrobel-nlp/krnnt) - we use dockerized version
 * langdetect - for detecting sentence language
     
 * polyglot - for detecting sentence language
@@ -177,7 +175,7 @@ https://docs.google.com/spreadsheets/d/1ebVH-otNJM0nCslY0I9aaCytXpwCihGTUDiAmMLz
 
 ### Instalation dependecies and problems
 
-langdetect needs additiona package
+langdetect needs additional package
 
 * install sudo apt-get install libicu-dev
 
