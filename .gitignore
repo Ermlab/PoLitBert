@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+*/gw_nas/*
+**/data/corpus_raw/*
+data/wiki_dump/*
