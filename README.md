@@ -100,10 +100,6 @@ Commands needed to reproduce fairseq models with various training protocols may 
 
 ## Pretrained models and vocabs
 
-
-## Models and vocab
-
-
 * [wiki_books_oscar_32k_linear](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_linear.zip) 
 * [wiki_books_oscar_32k_tri](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_tri.zip)
 * [wiki_books_oscar_32k_cos1_2](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_cos1_2.zip)
