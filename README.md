@@ -100,18 +100,16 @@ Commands needed to reproduce fairseq models with various training protocols may 
 
 ## Pretrained models and vocabs
 
-* [wiki_books_oscar_32k_linear](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_linear.zip) 
-* [wiki_books_oscar_32k_tri](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_tri.zip)
-* [wiki_books_oscar_32k_cos1_2](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_cos1_2.zip)
-* [wiki_books_oscar_32k_tri_full](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_tri_full.zip)
-* [wiki_books_oscar_32k_cos1_5](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_cos1_5.zip)
-* [wiki_books_oscar_32k_linear_full](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_32k_linear_full.zip)
-* [wiki_books_oscar_50k_linear50k](https://storage.googleapis.com/herbert-data/models/wiki_books_oscar_50k_linear50k.zip)
+* [PoLitBert_v32k_linear_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_linear_50k.zip) 
+* [PoLitBert_v32k_tri_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_tri_50k.zip)
+* [PoLitBert_v32k_cos1_2_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_cos1_2_50k.zip)
+* [PoLitBert_v32k_tri_125k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_tri_125k.zip)
+* [PoLitBert_32k_cos1_5](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_cos1_5_50k.zip)
+* [PoLitBert_v32k_cos1_5_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_linear_125k.zip)
+* [PoLitBert_v50k_linear_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v50k_linear_50k.zip)
 
 
 ### KLEJ evaluation
-
-
 
 All models were evaluated at 26.07.2020 with 9 [KLEJ benchmark](https://klejbenchmark.com/) tasks . 
 Below results were achieved with use of fine-tuning scripts from 
@@ -121,15 +119,15 @@ the potential of the models may not been fully utilized yet.
 
 | Model                                | NKJP-NER | CDSC-E | CDSC-R |  CBD | PolEmo2.0-IN | PolEmo2.0-OUT |  DYK |  PSC |  AR  |  Avg  |
 |--------------------------------------|:--------:|:------:|:------:|:----:|:------------:|:-------------:|:----:|:----:|:----:|:-----:|
-| wiki_books_oscar_32k_linear          |     92.3 |   91.5 |   92.2 |   64 |         89.8 |          76.1 | 60.2 | 97.9 | 87.6 | 83.51 |
-| wiki_books_oscar_32k_linear_2ep      |     91.9 |   91.8 |   90.9 | 64.6 |         89.1 |          75.9 | 59.8 | 97.9 | 87.9 | 83.31 |
-| wiki_books_oscar_32k_tri_full        |     93.6 |   91.7 |   91.8 | 62.4 |         90.3 |          75.7 |   59 | 97.4 | 87.2 | 83.23 |
-| wiki_books_oscar_32k_linear_full_2ep |     94.3 |   92.1 |   92.8 |   64 |         90.6 |          79.1 | 51.7 | 94.1 | 88.7 | 83.04 |
-| wiki_books_oscar_32k_tri             |     93.9 |   91.7 |   92.1 | 57.6 |         88.8 |          77.9 | 56.6 | 96.5 | 87.7 | 82.53 |
-| wiki_books_oscar_32k_linear_full     |       94 |   91.3 |   91.8 | 61.1 |         90.4 |          78.1 | 50.8 | 95.8 | 88.2 | 82.39 |
-| wiki_books_oscar_50k_linear50k       |     92.8 |   92.3 |   91.7 | 57.7 |         90.3 |          80.6 | 42.2 | 97.4 | 88.5 | 81.50 |
-| wiki_books_oscar_32k_cos1_2          |     92.5 |   91.6 |   90.7 | 60.1 |         89.5 |          73.5 | 49.1 | 95.2 | 87.5 | 81.08 |
-| wiki_books_oscar_32k_cos1_5          |     93.2 |   90.7 |   89.5 | 51.7 |         89.5 |          74.3 | 49.1 | 97.1 | 87.5 | 80.29 |
+| PoLitBert_v32k_linear_50k          |     92.3 |   91.5 |   92.2 |   64 |         89.8 |          76.1 | 60.2 | 97.9 | 87.6 | 83.51 |
+| PoLitBert_v32k_linear_50k_2ep      |     91.9 |   91.8 |   90.9 | 64.6 |         89.1 |          75.9 | 59.8 | 97.9 | 87.9 | 83.31 |
+| PoLitBert_v32k_tri_125k        |     93.6 |   91.7 |   91.8 | 62.4 |         90.3 |          75.7 |   59 | 97.4 | 87.2 | 83.23 |
+| PoLitBert_v32k_linear_125k_2ep |     94.3 |   92.1 |   92.8 |   64 |         90.6 |          79.1 | 51.7 | 94.1 | 88.7 | 83.04 |
+| PoLitBert_v32k_tri_50k             |     93.9 |   91.7 |   92.1 | 57.6 |         88.8 |          77.9 | 56.6 | 96.5 | 87.7 | 82.53 |
+| PoLitBert_v32k_linear_125k     |       94 |   91.3 |   91.8 | 61.1 |         90.4 |          78.1 | 50.8 | 95.8 | 88.2 | 82.39 |
+| PoLitBert_v50k_linear_50k       |     92.8 |   92.3 |   91.7 | 57.7 |         90.3 |          80.6 | 42.2 | 97.4 | 88.5 | 81.50 |
+| PoLitBert_v32k_cos1_2_50k          |     92.5 |   91.6 |   90.7 | 60.1 |         89.5 |          73.5 | 49.1 | 95.2 | 87.5 | 81.08 |
+| PoLitBert_v32k_cos1_5_50k          |     93.2 |   90.7 |   89.5 | 51.7 |         89.5 |          74.3 | 49.1 | 97.1 | 87.5 | 80.29 |
 
 A comparison with other developed models is available in the continuously updated [leaderboard](https://klejbenchmark.com/leaderboard/) of evaluation tasks.
 
@@ -140,22 +138,22 @@ A comparison with other developed models is available in the continuously update
 
 We believe in open science and knowledge sharing, thus we decided to share complete code, params, experiment details and tensorboards.
 
-Link to [PoLitBert research log - public](
-https://docs.google.com/spreadsheets/d/1ebVH-otNJM0nCslY0I9aaCytXpwCihGTUDiAmMLz-zc/edit?usp=sharing) (the same as table below).
+Link to [PoLitBert research log](
+https://docs.google.com/spreadsheets/d/1ebVH-otNJM0nCslY0I9aaCytXpwCihGTUDiAmMLz-zc/edit?usp=sharing) (same as below).
 
 
 | Experiment                                                                                                                                         | Model name                                                                                                                             | Vocab size | Scheduler                    | BSZ   | WPB      | Steps   | Train tokens | Train loss | Valid loss | Best (test) loss |
 |----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|------------|------------------------------|-------|----------|---------|--------------|------------|------------|------------------|
-| [#1](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-1---linear-decay,-50k-updates)         | wiki_books_oscar_32k_linear ([tensorboard](https://tensorboard.dev/experiment/KfLdZq1gTYy8pPtKrVuoHw/#scalars)) | 32k        | linear decay                 | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,502 |      1,460 |            1,422 |
-| [#2](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-2---cyclic-triangular,-50k-updates)    | wiki_books_oscar_32k_tri ([tensorboard](https://tensorboard.dev/experiment/eGmn2nsgQEqqaNvbY3b1kQ/#scalars))    | 32k        | triangular                   | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,473 |      1,436 |            1,402 |
-| [#3](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-3---cyclic-cosine,-50k-updates)        | wiki_books_oscar_32k_cos1 ([tensorboard](https://tensorboard.dev/experiment/Vg9bGil3QC2fKgnyp7eKRg/))           | 32k        | cosine mul=1                 | 8 192 | 4,07E+06 |  23 030 |     9,37E+10 |     10,930 |     11,000 |            1,832 |
-| [#4](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-4---cyclic-cosine,-50k-updates)        | wiki_books_oscar_32k_cos1_2 ([tensorboard](https://tensorboard.dev/experiment/ElKrpymrQXKETX4Ea9lLSQ/#scalars)) | 32k        | cosine mul=1 peak=0.0005     | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,684 |      1,633 |            1,595 |
-| [#5](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiments-5,-6,-7---cyclic-cosine,-50k-updates) | wiki_books_oscar_32k_cos1_3 ([tensorboard]())                                                                   | 32k        | cosine mul=2                 | 8 192 | 4,07E+06 |   3 735 |     1,52E+10 |     10,930 |            |                  |
-| [#6](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiments-5,-6,-7---cyclic-cosine,-50k-updates) | wiki_books_oscar_32k_cos1_4 ([tensorboard](https://tensorboard.dev/experiment/fNXEfyauRvSRkxri064RNA/))         | 32k        | cosine mul=2 grad-clip=0.9   | 8 192 | 4,07E+06 |   4 954 |     2,02E+10 |     10,910 |     10,940 |            2,470 |
-| [#8](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-8---cyclic-triangular,-125k-updates)   | wiki_books_oscar_32k_tri_full ([tensorboard](https://tensorboard.dev/experiment/OfVtgeQLRlq6iMtDgdAPGA/#scalars))       | 32k        | triangular                   | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,435 |      1,313 |            1,363 |
-| [#9](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-9---cyclic-cosine,-125k-updates)       | wiki_books_oscar_32k_cos1_5 ([tensorboard](https://tensorboard.dev/experiment/6ocg02CyQvCpq60gWSzDXQ/#scalars))         | 32k        | cosine, mul=2, grad-clip=0.9 | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,502 |      1,358 |            1,426 |
-| [#10](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-10---linear,-125k-updates)            | wiki_books_oscar_32k_linear_full ([tensorboard](https://tensorboard.dev/experiment/55MrDxXxS2mP8uGyZk5WPg/#scalars))    | 32k        | linear decay                 | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,322 |      1,218 |            1,268 |
-| [#11](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-11---vocab50k,-linear,-50k-updates)   | wiki_books_oscar_50k_linear50k ([tensorboard](https://tensorboard.dev/experiment/nkYJ7jp1RR2fLCqbGE7Kfw/#scalars))      | 50k        | linear decay                 | 8 192 | 4,07E+06 |  50 000 |     2,04E+11 |      1,546 |      1,439 |            1,480 |
+| [#1](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-1---linear-decay,-50k-updates)         | PoLitBert_v32k_linear_50k ([tensorboard](https://tensorboard.dev/experiment/KfLdZq1gTYy8pPtKrVuoHw/#scalars)) | 32k        | linear decay                 | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,502 |      1,460 |            1,422 |
+| [#2](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-2---cyclic-triangular,-50k-updates)    | PoLitBert_v32k_tri_50k ([tensorboard](https://tensorboard.dev/experiment/eGmn2nsgQEqqaNvbY3b1kQ/#scalars))    | 32k        | triangular                   | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,473 |      1,436 |            1,402 |
+| [#3](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-3---cyclic-cosine,-50k-updates)        | PoLitBert_v32k_cos1_50k ([tensorboard](https://tensorboard.dev/experiment/Vg9bGil3QC2fKgnyp7eKRg/))           | 32k        | cosine mul=1                 | 8 192 | 4,07E+06 |  23 030 |     9,37E+10 |     10,930 |     11,000 |            1,832 |
+| [#4](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-4---cyclic-cosine,-50k-updates)        | PoLitBert_v32k_cos1_2_50k ([tensorboard](https://tensorboard.dev/experiment/ElKrpymrQXKETX4Ea9lLSQ/#scalars)) | 32k        | cosine mul=1 peak=0.0005     | 8 192 | 4,07E+06 |  50 000 |     2,03E+11 |      1,684 |      1,633 |            1,595 |
+| [#5](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiments-5,-6,-7---cyclic-cosine,-50k-updates) | PoLitBert_v32k_cos1_3_50k ([tensorboard]())                                                                   | 32k        | cosine mul=2                 | 8 192 | 4,07E+06 |   3 735 |     1,52E+10 |     10,930 |            |                  |
+| [#6](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiments-5,-6,-7---cyclic-cosine,-50k-updates) | PoLitBert_v32k_cos1_4_50k ([tensorboard](https://tensorboard.dev/experiment/fNXEfyauRvSRkxri064RNA/))         | 32k        | cosine mul=2 grad-clip=0.9   | 8 192 | 4,07E+06 |   4 954 |     2,02E+10 |     10,910 |     10,940 |            2,470 |
+| [#8](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-8---cyclic-triangular,-125k-updates)   | PoLitBert_v32k_tri_125k ([tensorboard](https://tensorboard.dev/experiment/OfVtgeQLRlq6iMtDgdAPGA/#scalars))       | 32k        | triangular                   | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,435 |      1,313 |            1,363 |
+| [#9](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-9---cyclic-cosine,-125k-updates)       | PoLitBert_v32k_cos1_5_50k ([tensorboard](https://tensorboard.dev/experiment/6ocg02CyQvCpq60gWSzDXQ/#scalars))         | 32k        | cosine, mul=2, grad-clip=0.9 | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,502 |      1,358 |            1,426 |
+| [#10](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-10---linear,-125k-updates)            | PoLitBert_v32k_linear_125k ([tensorboard](https://tensorboard.dev/experiment/55MrDxXxS2mP8uGyZk5WPg/#scalars))    | 32k        | linear decay                 | 8 192 | 4,07E+06 | 125 000 |     5,09E+11 |      1,322 |      1,218 |            1,268 |
+| [#11](https://nbviewer.jupyter.org/github/Ermlab/PoLitBert/blob/dev/polish_roberta_training.ipynb#Experiment-11---vocab50k,-linear,-50k-updates)   | PoLitBert_v50k_linear_50k ([tensorboard](https://tensorboard.dev/experiment/nkYJ7jp1RR2fLCqbGE7Kfw/#scalars))      | 50k        | linear decay                 | 8 192 | 4,07E+06 |  50 000 |     2,04E+11 |      1,546 |      1,439 |            1,480 |
 
 
 ## Used libraries
