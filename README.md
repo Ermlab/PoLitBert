@@ -207,9 +207,9 @@ We would like to express ours gratitude to NVidia Inception Programme and Amazon
 
 ## About Ermlab Software
 
-#### Ermlab - Polish machine learning company 
+__Ermlab__ - Polish machine learning company 
 
-#### :link: [Website](https://ermlab.com/) | :octocat: [Repository](https://github.com/ermlab)  
+:owl: [Website](https://ermlab.com/)   |   :octocat: [Repository](https://github.com/ermlab)  
 
 <img src="/images/ermlab_software.png" width="800">.
 
