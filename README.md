@@ -1,7 +1,7 @@
-# PoLitBert - Polish RoBERTA model 
+# PoLitBert - Polish RoBERTa model 
 
-Polish RoBERTA model trained on Polish Wikipedia, Polish literature and Oscar.
-Major assumption is that quality text will give good  model.
+Polish RoBERTa model trained on Polish Wikipedia, Polish literature and Oscar.
+Major assumption is that good quality text will give good model.
 
 We believe in open science and knowledge sharing, thus we decided to share complete code, params, experiment details and tensorboards.
 
@@ -10,7 +10,7 @@ We believe in open science and knowledge sharing, thus we decided to share compl
   - [Data](#data)
     - [Data processing for training](#data-processing-for-training)
     - [Training, testing dataset stats](#training-testing-dataset-stats)
-  - [Training Polish RoBERTA protocol with Fairseq](#training-polish-roberta-protocol-with-fairseq)
+  - [Training Polish RoBERTa protocol with Fairseq](#training-polish-roberta-protocol-with-fairseq)
   - [Pretrained models and vocabs](#pretrained-models-and-vocabs)
     - [KLEJ evaluation](#klej-evaluation)
     - [Details of models training](#details-of-models-training)
@@ -20,33 +20,33 @@ We believe in open science and knowledge sharing, thus we decided to share compl
 
 ## Experiments setup and goals
 
-During experiments we want to examine: 
+During experiments, we want to examine: 
 
-* impact of different leraning schedulers for training speed and accuracy, tested:
+* impact of different learning schedulers for training speed and accuracy, tested:
     * linear schedule with warmup
-    * cyclic schedule: cosine, trinagular
+    * cyclic schedule: cosine, triangular
 * impact of training time on final accuracy
 
 
 ## Data
 
 * Polish Wikipedia dump 03.2020 - archive link https://dumps.wikimedia.org/plwiki/20200301 (not working anymore)
-* [Polish private book corpus] (6GB)
-* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences. keep only valid sentences etc.)( [Cleaned Polish Oscar details]() )
+* Polish private book corpus (6GB)
+* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences, keep only valid sentences etc.)( [Cleaned Polish Oscar details]() )
 
 
 ### Data processing for training
 
 Our main assumption is that good quality text  should produce good language model. 
 So far the most popular polish dataset was "Polish wikipedia dump" however this text characterize with formal language. 
-Second source of text is polish part of Oscar corpus - crawled text from the polish internet. When we investigate this coprus with more details it appears that it contains a lot of: foreign sentences (in Russia, English, German etc.), short sentences (less then ) and not grammatical sentences (as words enumerations )
+Second source of text is polish part of Oscar corpus - crawled text from the polish internet. When we investigate this coprus with more details it appears that it contains a lot of: foreign sentences (in Russian, English, German etc.), too short sentences and not grammatical sentences (as words enumerations).
 
-We prepare the few cleaning heuristics:
+We prepared the few cleaning heuristics:
 
 * remove sentences shorter than
 * remove non polish sentences
-* remove ungrammatical sentences (without verbs and with to many nouns)
-* perform sentence tokenization and save each sentence in new line, after each document the  new line was added
+* remove ungrammatical sentences (without verbs and with too many nouns)
+* perform sentence tokenization and save each sentence in new line, after each document the new line was added
 
 Data was cleaned with use of [process_sentences.py](process_sentences.py) script, whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
 
@@ -101,7 +101,7 @@ For testing we take ~10% of each corpus
 
 General recipe of the final data preparation and model training process:
 1. Prepare huge text file _data.txt_ e.g. Wikipedia text, where each sentence is in a new line and each article is separated by two new lines.
-1. Take 10-15M lines and prepare another file for sentencpiece (vocabulary builder) - again, each sentence is in one line.
+1. Take 10-15M lines and prepare another file for sentencepiece (vocabulary builder) - again, each sentence is in one line.
 1. Train sentencepiece vocabulary and save it in fairseq format _vocab.fairseq.txt_.
 1. Encode _data.txt_ with trained sentencepiece model to _data.sp.txt_.
 1. Preprocess _data.sp.txt_ with [fairseq-preprocess](https://fairseq.readthedocs.io/en/latest/command_line_tools.html#fairseq-preprocess).
@@ -174,7 +174,6 @@ https://docs.google.com/spreadsheets/d/1ebVH-otNJM0nCslY0I9aaCytXpwCihGTUDiAmMLz
 
 * [KRNNT - Polish morphological tagger.](https://github.com/kwrobel-nlp/krnnt) - we use dockerized version
 * langdetect - for detecting sentence language
-    
 * polyglot - for detecting sentence language
 * sentencepiece
 * [Fairseq v0.9](https://github.com/pytorch/fairseq)
@@ -182,11 +181,9 @@ https://docs.google.com/spreadsheets/d/1ebVH-otNJM0nCslY0I9aaCytXpwCihGTUDiAmMLz
 
 ### Instalation dependecies and problems
 
-langdetect needs additional package
-
-* install sudo apt-get install libicu-dev
-
-Sentencepiece was installed from source code.
+* langdetect needs additional package
+  * install sudo apt-get install libicu-dev
+* sentencepiece was installed from source code
 
 
 ## Acknowledgements
@@ -197,20 +194,20 @@ This is the joint work of companies [Ermlab Software](https://ermlab.com) and [L
 We would like to express ours gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
 
 
-### Autors: 
+### Authors: 
 
-* [Krzysztof Sopyła]((https://www.linkedin.com/in/krzysztofsopyla/))
+* [Krzysztof Sopyła](https://www.linkedin.com/in/krzysztofsopyla/)
 * [Łukasz Sawaniewski](https://www.linkedin.com/in/sawaniewski/)
 
 
 ### Also appreciate the help from
 
-- [simonefrancia](https://github.com/simonefrancia) form Musixmatch for his [detailed explanations how they trained Roberta](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
+- [simonefrancia](https://github.com/simonefrancia) form Musixmatch for his [detailed explanations how they trained RoBERTa](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
 
 
 ## About Ermlab Software
 
-Polish machine learning company @[ermlab](https://github.com/ermlab)
+[Ermlab](https://github.com/ermlab) - Polish machine learning company 
 
 
 <img src="/images/ermlab_software.png" width="800">.
