@@ -5,6 +5,19 @@ Major assumption is that quality text will give good  model.
 
 We believe in open science and knowledge sharing, thus we decided to share complete code, params, experiment details and tensorboards.
 
+## Table of Contents
+  - [Experiments setup and goals](#experiments-setup-and-goals)
+  - [Data](#data)
+    - [Data processing for training](#data-processing-for-training)
+    - [Training, testing dataset stats](#training-testing-dataset-stats)
+  - [Training Polish RoBERTA protocol with Fairseq](#training-polish-roberta-protocol-with-fairseq)
+  - [Pretrained models and vocabs](#pretrained-models-and-vocabs)
+    - [KLEJ evaluation](#klej-evaluation)
+    - [Details of models training](#details-of-models-training)
+  - [Used libraries](#used-libraries)
+  - [Acknowledgements](#acknowledgements)
+  - [About Ermlab Software](#about-ermlab-software)
+
 ## Experiments setup and goals
 
 During experiments we want to examine: 
