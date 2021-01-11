@@ -39,16 +39,16 @@ During experiments, we want to examine:
 
 Our main assumption is that good quality text  should produce good language model. 
 So far the most popular polish dataset was "Polish wikipedia dump" however this text characterize with formal language. 
-Second source of text is polish part of Oscar corpus - crawled text from the polish internet. When we investigate this coprus with more details it appears that it contains a lot of: foreign sentences (in Russian, English, German etc.), too short sentences and not grammatical sentences (as words enumerations).
+Second source of text is polish part of Oscar corpus - crawled text from the polish internet. When we investigate this corpus with more details it appears that it contains a lot of: foreign sentences (in Russian, English, German etc.), too short sentences and not grammatical sentences (as words enumerations).
 
-We prepared the few cleaning heuristics:
+We prepared a few cleaning heuristics:
 
 * remove sentences shorter than
 * remove non polish sentences
 * remove ungrammatical sentences (without verbs and with too many nouns)
 * perform sentence tokenization and save each sentence in new line, after each document the new line was added
 
-Data was cleaned with use of [process_sentences.py](process_sentences.py) script, whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
+Data was cleaned with use of [process_sentences.py](process_sentences.py) script, the whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
 
 
 * [Polish Wikipedia dump 03.2020 1.5GB](https://storage.googleapis.com/ermlab-nlp-public/corpus-wikipedia/corpus_wikipedia_2020-03-01_all_lines.txt)
@@ -202,7 +202,7 @@ We would like to express ours gratitude to NVidia Inception Programme and Amazon
 
 ### Also appreciate the help from
 
-- [simonefrancia](https://github.com/simonefrancia) form Musixmatch for his [detailed explanations how they trained RoBERTa](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
+- [simonefrancia](https://github.com/simonefrancia) from Musixmatch for his [detailed explanations how they trained RoBERTa](https://github.com/musixmatchresearch/umberto/issues/2) Italian model [Umberto ](https://github.com/musixmatchresearch/umberto)
 
 
 ## About Ermlab Software
