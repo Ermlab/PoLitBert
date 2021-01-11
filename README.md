@@ -51,13 +51,13 @@ We prepared the few cleaning heuristics:
 Data was cleaned with use of [process_sentences.py](process_sentences.py) script, whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
 
 
-* [Polish Wikipedia dump 03.2020 1.5GB](https://storage.googleapis.com/herbert-data/corpus/wikipedia/corpus_wikipedia_2020-03-01_all_lines.txt)
+* [Polish Wikipedia dump 03.2020 1.5GB](https://storage.googleapis.com/ermlab-nlp/corpus/wikipedia/corpus_wikipedia_2020-03-01_all_lines.txt)
 * Cleaned Polish Oscar corpus
-    * [corpus_oscar_2020-04-10_32M_lines.txt 8.6GB](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_32M_lines_train.txt)
-    * [corpus_oscar_2020-04-10_64M_lines.txt (8.6GB) ](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_64M_lines.txt) 
-    * [corpus_oscar_2020-04-10_96M_lines.txt (8.6GB)](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_96M_lines.txt)
-    * [corpus_oscar_2020-04-10_128M_lines.txt (8.6GB)](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_128M_lines.txt) 
-    * [corpus_oscar_2020-04-10_128M_above_lines.txt (5.8G)](https://storage.googleapis.com/herbert-data/corpus/oscar/corpus_oscar_2020-04-10_128M_above_lines.txt)
+    * [corpus_oscar_2020-04-10_32M_lines.txt 8.6GB](https://storage.googleapis.com/ermlab-nlp/corpus/oscar/corpus_oscar_2020-04-10_32M_lines_train.txt)
+    * [corpus_oscar_2020-04-10_64M_lines.txt (8.6GB) ](https://storage.googleapis.com/ermlab-nlp/corpus/oscar/corpus_oscar_2020-04-10_64M_lines.txt) 
+    * [corpus_oscar_2020-04-10_96M_lines.txt (8.6GB)](https://storage.googleapis.com/ermlab-nlp/corpus/oscar/corpus_oscar_2020-04-10_96M_lines.txt)
+    * [corpus_oscar_2020-04-10_128M_lines.txt (8.6GB)](https://storage.googleapis.com/ermlab-nlp/corpus/oscar/corpus_oscar_2020-04-10_128M_lines.txt) 
+    * [corpus_oscar_2020-04-10_128M_above_lines.txt (5.8G)](https://storage.googleapis.com/ermlab-nlp/corpus/oscar/corpus_oscar_2020-04-10_128M_above_lines.txt)
 
 
 Summary of Cleaned Polish Oscar corpus
@@ -113,13 +113,13 @@ Commands needed to reproduce fairseq models with various training protocols may 
 
 ## Pretrained models and vocabs
 
-* [PoLitBert_v32k_linear_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_linear_50k.zip) 
-* [PoLitBert_v32k_tri_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_tri_50k.zip)
-* [PoLitBert_v32k_cos1_2_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_cos1_2_50k.zip)
-* [PoLitBert_v32k_tri_125k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_tri_125k.zip)
-* [PoLitBert_32k_cos1_5](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_cos1_5_50k.zip)
-* [PoLitBert_v32k_cos1_5_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v32k_linear_125k.zip)
-* [PoLitBert_v50k_linear_50k](https://storage.googleapis.com/herbert-data/models/PoLitBert_v50k_linear_50k.zip)
+* [PoLitBert_v32k_linear_50k](https://storage.googleapis.com/ermlab-nlp/models/PoLitBert_v32k_linear_50k.zip) 
+* [PoLitBert_v32k_tri_50k](https://storage.googleapis.com/ermlab-nlp/models/PoLitBert_v32k_tri_50k.zip)
+* [PoLitBert_v32k_cos1_2_50k](https://storage.googleapis.com/ermlab-nlp/models/PoLitBert_v32k_cos1_2_50k.zip)
+* [PoLitBert_v32k_tri_125k](https://storage.googleapis.com/ermlab-nlp/models/PoLitBert_v32k_tri_125k.zip)
+* [PoLitBert_32k_cos1_5](https://storage.googleapis.com/ermlab-nlp/models/PoLitBert_v32k_cos1_5_50k.zip)
+* [PoLitBert_v32k_cos1_5_50k](https://storage.googleapis.com/ermlab-nlp/models/PoLitBert_v32k_linear_125k.zip)
+* [PoLitBert_v50k_linear_50k](https://storage.googleapis.com/ermlab-nlp/models/PoLitBert_v50k_linear_50k.zip)
 
 
 ### KLEJ evaluation
