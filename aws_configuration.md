@@ -78,14 +78,14 @@ source ~/.profile
 clone the herbert repo
 
 ```
-git clone https://github.com/Ermlab/politbert.git
+git clone https://github.com/Ermlab/PoLitBert.git
 git checkout dev
 ```
 
 Install dependecies
 
 ```
-cd herbert
+cd PoLitBert
 pipenv install
 ```
 
