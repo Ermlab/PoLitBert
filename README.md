@@ -32,7 +32,7 @@ During experiments, we want to examine:
 
 * Polish Wikipedia dump 03.2020 - archive link https://dumps.wikimedia.org/plwiki/20200301 (not working anymore)
 * Polish private book corpus (6GB)
-* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences, keep only valid sentences etc.)( [Cleaned Polish Oscar details]() )
+* Cleaned [Polish Oscar corpus](https://traces1.inria.fr/oscar/files/Compressed/pl_dedup.txt.gz) (remove non-polish sentences, keep only valid sentences etc.)([Cleaned Polish Oscar details](https://github.com/Ermlab/PoLitBert/blob/master/polish_process_data.ipynb))
 
 
 ### Data processing for training
@@ -50,14 +50,14 @@ We prepared a few cleaning heuristics:
 
 Data was cleaned with use of [process_sentences.py](process_sentences.py) script, the whole process is presented in the [polish_process_data.ipynb](polish_process_data.ipynb) notebook.
 
-
-* [Polish Wikipedia dump 03.2020 1.5GB](https://storage.googleapis.com/ermlab-nlp-public/corpus-wikipedia/corpus_wikipedia_2020-03-01_all_lines.txt)
+* Polish Wikipedia dump (03.2020) 
+    * [corpus_wikipedia_2020-03-01_all_lines.zip (0.58 GB)](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/corpus-wikipedia/corpus_wikipedia_2020-03-01_all_lines.zip)
 * Cleaned Polish Oscar corpus
-    * [corpus_oscar_2020-04-10_32M_lines.txt 8.6GB](https://storage.googleapis.com/ermlab-nlp-public/corpus-oscar/corpus_oscar_2020-04-10_32M_lines.txt)
-    * [corpus_oscar_2020-04-10_64M_lines.txt (8.6GB) ](https://storage.googleapis.com/ermlab-nlp-public/corpus-oscar/corpus_oscar_2020-04-10_64M_lines.txt) 
-    * [corpus_oscar_2020-04-10_96M_lines.txt (8.6GB)](https://storage.googleapis.com/ermlab-nlp-public/corpus-oscar/corpus_oscar_2020-04-10_96M_lines.txt)
-    * [corpus_oscar_2020-04-10_128M_lines.txt (8.6GB)](https://storage.googleapis.com/ermlab-nlp-public/corpus-oscar/corpus_oscar_2020-04-10_128M_lines.txt) 
-    * [corpus_oscar_2020-04-10_128M_above_lines.txt (5.8G)](https://storage.googleapis.com/ermlab-nlp-public/corpus-oscar/corpus_oscar_2020-04-10_128M_above_lines.txt)
+    * [corpus_oscar_2020-04-10_32M_lines.zip (3.35 GB)](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/corpus-oscar/corpus_oscar_2020-04-10_32M_lines.zip)
+    * [corpus_oscar_2020-04-10_64M_lines.zip (3.45 GB)](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/corpus-oscar/corpus_oscar_2020-04-10_64M_lines.zip) 
+    * [corpus_oscar_2020-04-10_96M_lines.zip (3.49 GB)](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/corpus-oscar/corpus_oscar_2020-04-10_96M_lines.zip)
+    * [corpus_oscar_2020-04-10_128M_lines.zip (3.53 GB)](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/corpus-oscar/corpus_oscar_2020-04-10_128M_lines.zip) 
+    * [corpus_oscar_2020-04-10_128M_above_lines.zip (1.93 GB)](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/corpus-oscar/corpus_oscar_2020-04-10_128M_above_lines.zip)
 
 
 Summary of Cleaned Polish Oscar corpus
@@ -113,13 +113,13 @@ Commands needed to reproduce fairseq models with various training protocols may 
 
 ## Pretrained models and vocabs
 
-* [PoLitBert_v32k_linear_50k](https://storage.googleapis.com/ermlab-nlp-public/models/PoLitBert_v32k_linear_50k.zip) 
-* [PoLitBert_v32k_tri_50k](https://storage.googleapis.com/ermlab-nlp-public/models/PoLitBert_v32k_tri_50k.zip)
-* [PoLitBert_v32k_cos1_2_50k](https://storage.googleapis.com/ermlab-nlp-public/models/PoLitBert_v32k_cos1_2_50k.zip)
-* [PoLitBert_v32k_tri_125k](https://storage.googleapis.com/ermlab-nlp-public/models/PoLitBert_v32k_tri_125k.zip)
-* [PoLitBert_32k_cos1_5](https://storage.googleapis.com/ermlab-nlp-public/models/PoLitBert_v32k_cos1_5_50k.zip)
-* [PoLitBert_v32k_cos1_5_50k](https://storage.googleapis.com/ermlab-nlp-public/models/PoLitBert_v32k_linear_125k.zip)
-* [PoLitBert_v50k_linear_50k](https://storage.googleapis.com/ermlab-nlp-public/models/PoLitBert_v50k_linear_50k.zip)
+* [PoLitBert_v32k_linear_50k](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/models/PoLitBert_v32k_linear_50k.zip) 
+* [PoLitBert_v32k_tri_50k](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/models/PoLitBert_v32k_tri_50k.zip)
+* [PoLitBert_v32k_cos1_2_50k](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/models/PoLitBert_v32k_cos1_2_50k.zip)
+* [PoLitBert_v32k_tri_125k](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/models/PoLitBert_v32k_tri_125k.zip)
+* [PoLitBert_32k_cos1_5](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/models/PoLitBert_v32k_cos1_5_50k.zip)
+* [PoLitBert_v32k_cos1_5_50k](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/models/PoLitBert_v32k_linear_125k.zip)
+* [PoLitBert_v50k_linear_50k](https://minio.clarin-pl.eu/ermlab/public/PoLitBert/models/PoLitBert_v50k_linear_50k.zip)
 
 
 ### KLEJ evaluation
