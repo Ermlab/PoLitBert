@@ -191,7 +191,6 @@ https://docs.google.com/spreadsheets/d/1ebVH-otNJM0nCslY0I9aaCytXpwCihGTUDiAmMLz
 This is the joint work of companies [Ermlab Software](https://ermlab.com/?utm_source=github&utm_medium=readme&utm_campaign=politbert) and [Literacka](https://literacka.com.pl/?utm_source=github&utm_medium=readme&utm_campaign=politbert)
 
 
-Part of this work was supported by NCBR grant POIR.01.01.01-00-1213/19 whose 
 Part of the work was financed from the grant of [The Polish National Centre for Research and Development](https://www.gov.pl/web/ncbr-en) no. POIR.01.01.01-00-1213/19, the beneficiary of which was Literacka. Project title "Asystent wydawniczy - oprogramowanie do analizy treści, wykorzystujące algorytmy sztucznej inteligencji w celu zautomatyzowania procesu wydawniczego i predykcji sukcesów rynkowych publikacji."
 
 We would like to express ours gratitude to NVidia Inception Programme and Amazon AWS for providing the free GPU credits - thank you! 
